@@ -44,5 +44,5 @@ HEADERS  += \
 FORMS    +=
 
 
-INCLUDEPATH += G:/boost_1_63_0
-DEPENDPATH += G:/boost_1_63_0
+INCLUDEPATH += F:/boost_1_64_0
+DEPENDPATH += F:/boost_1_64_0
