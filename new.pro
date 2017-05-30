@@ -38,6 +38,11 @@ HEADERS  += \
     SquareBoard.h \
     Button.h \
     Game.h \
-    CreateShip.h
+    CreateShip.h \
+    klient.h
 
 FORMS    +=
+
+
+INCLUDEPATH += G:/boost_1_63_0
+DEPENDPATH += G:/boost_1_63_0

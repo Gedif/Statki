@@ -37,7 +37,7 @@ void readThread(socket_ptr);
 void writeThread(socket_ptr);
 
 
-int main()
+void startSerwer()
 {
 
     cout << "Waiting for clients..." << endl;
