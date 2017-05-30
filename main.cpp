@@ -1,6 +1,6 @@
 #include <QApplication>
 #include "Game.h"
-#include "Klient.cpp"
+//#include "Klient.cpp"
 
 //Klient* klie;
 Game* game;
