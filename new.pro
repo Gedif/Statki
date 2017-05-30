@@ -41,3 +41,6 @@ HEADERS  += \
     CreateShip.h
 
 FORMS    +=
+
+INCLUDEPATH += F:/boost_1_64_0
+DEPENDPATH += F:/boost_1_64_0
