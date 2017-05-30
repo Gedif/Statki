@@ -7,7 +7,7 @@ Game* game;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    //aleOSoChozi
     game = new Game();
     game->show();
     game->displayMainMenu();

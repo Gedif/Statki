@@ -27,11 +27,11 @@ bool Square::getIsPlaced(){
 
 void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
     qDebug() << getState();
-    if (getState() == 3){
+    if (getState() == ship){
         qDebug() << "ifdupaa" << getIsPlaced() << getState();
         game->pickUpShip(this);
     }
-    else if (getState() == 0 && game->squareToPlace != NULL){
+    else if (getState() == unknown && game->squareToPlace != NULL){
        qDebug() << "ifdupa";
        game->placeShip(this);
     }

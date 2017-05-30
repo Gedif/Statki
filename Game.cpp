@@ -24,7 +24,7 @@ void Game::mouseMoveEvent(QMouseEvent *event){
     QGraphicsView::mouseMoveEvent(event);
 }
 void Game::mousePressEvent(QMouseEvent *event){
-    // make right click return cardToPlace to originalPos
+    // make right click return squareToPlace to originalPos
     if (event->button() == Qt::RightButton){
         if (squareToPlace){
             squareToPlace->setPos(originalPos);
@@ -54,8 +54,8 @@ void Game::placeShip(Square *squareToReplace){
     qDebug() << "resdaada" << squareToPlace->getState();
     squareBoard->getSquares().append(squareToPlace);
     qDebug() << "a" << squareToPlace->getState();
-    qDebug() << "resdaada" << squareBoard->getSquares().at(1)->getState();
-    scene->removeItem(squareToReplace);
+    qDebug() << "resdaada" << squareBoard->getSquares().at(0)->getState();
+    //scene->removeItem(squareToReplace);
     squareToPlace->setIsPlaced(true);
     squareToPlace = NULL;
 
