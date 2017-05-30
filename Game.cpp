@@ -47,29 +47,16 @@ void Game::pickUpShip(Square* square){
 
 void Game::placeShip(Square *squareToReplace){
     //replaces the specified square with the square to place
-   // qDebug() << "dupa" << squareBoard->getSquares();
     qDebug() << "statek przed" << squareBoard->getSquares().indexOf(squareToPlace);
     squareToPlace->setPos(squareToReplace->pos());
-    qDebug() << "index to replace"<< squareBoard->getSquares().indexOf(squareToReplace);
-    stala = squareBoard->getSquares().indexOf(squareToReplace);
-    //squareBoard->getSquares().insert(squareBoard->getSquares().indexOf(squareToReplace)-1,squareToPlace);
-    squareBoard->getSquares().operator [](stala)=squareToPlace;
+    qDebug() << "index to replace"<< squareBoard->getSquares().indexOf(squareToReplace);;
+    squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace))=squareToPlace;
     squareBoard->getSquares().removeAll(squareToReplace);
-    squareToReplace->setState(ship);
     qDebug() << "stan statek" << squareToPlace->getState();
-    squareBoard->getSquares().append(squareToPlace);
-    qDebug() << "index woda po" << squareBoard->getSquares().indexOf(squareToReplace) << squareToReplace->getState();
-    qDebug() << "index statek po" << squareBoard->getSquares().indexOf(squareToPlace);
-    qDebug() << "sten statek po umieszczeniu" << squareToPlace->getState();
-    qDebug() << "pierwsze pole po umieszczeniu" << squareBoard->getSquares().at(0)->getState();
-    scene->removeItem(squareToReplace);
-    squareBoard->getSquares().operator [](stala)=squareToPlace;
-    qDebug() << "index statek po po" << squareBoard->getSquares().indexOf(squareToReplace);
-    qDebug() << "index statek po po" << squareBoard->getSquares().indexOf(squareToPlace);
     squareToPlace->setIsPlaced(true);
     squareToPlace = NULL;
 
-    //removeUsedShip
+
 }
 
 void Game::start(){
@@ -169,18 +156,16 @@ void Game::displayMainMenu(){
 void Game::displayGameWindow()
 {
     list = getStates(squareBoard);
-    qDebug() << "da" << list;
+    qDebug() << "Lista indeksów:" << list;
 
-    //squareBoard->placeSquares(520,10,10,10,unknown);
+    squareBoard->placeSquares(520,10,10,10,unknown);
 
 }
 
 QList<int> Game::getStates(SquareBoard* board){
     for (int i = 0; i < board->getSquares().size(); ++i) {
-        qDebug() << "rea" << i << board->getSquares().at(i)->getState();
         if (board->getSquares().at(i)->getState() == 3)
             list.append(i);
          }
-
     return list;
 }

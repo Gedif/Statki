@@ -27,7 +27,7 @@ public:
     void placeShip(Square *squareToReplace);
     //void removeUsedShip(Square square, int quantity);
     // public attributes
-    int stala;
+
     QList<int> list;
     QGraphicsScene* scene;
     SquareBoard* squareBoard;
