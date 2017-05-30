@@ -29,7 +29,9 @@ SOURCES +=\
     Button.cpp \
     main.cpp \
     CreateShip.cpp \
-    Game.cpp
+    Game.cpp \
+    Klient.cpp \
+    Serwer.cpp
 
 HEADERS  += \
     Square.h \
