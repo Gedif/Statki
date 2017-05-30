@@ -20,9 +20,10 @@ public:
 
     void placeSquares(int x, int y, int cols, int rows,state state);
 
+     QList<Square*> squares;
 private:
     void createSquaresColumn(int x, int y, int numOfRows,state state);
-    QList<Square*> squares;
+
 };
 
 

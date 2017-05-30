@@ -48,14 +48,24 @@ void Game::pickUpShip(Square* square){
 void Game::placeShip(Square *squareToReplace){
     //replaces the specified square with the square to place
    // qDebug() << "dupa" << squareBoard->getSquares();
+    qDebug() << "statek przed" << squareBoard->getSquares().indexOf(squareToPlace);
     squareToPlace->setPos(squareToReplace->pos());
+    qDebug() << "index to replace"<< squareBoard->getSquares().indexOf(squareToReplace);
+    stala = squareBoard->getSquares().indexOf(squareToReplace);
+    //squareBoard->getSquares().insert(squareBoard->getSquares().indexOf(squareToReplace)-1,squareToPlace);
+    squareBoard->getSquares().operator [](stala)=squareToPlace;
     squareBoard->getSquares().removeAll(squareToReplace);
-    squareToPlace->setState(ship);
-    qDebug() << "resdaada" << squareToPlace->getState();
+    squareToReplace->setState(ship);
+    qDebug() << "stan statek" << squareToPlace->getState();
     squareBoard->getSquares().append(squareToPlace);
-    qDebug() << "a" << squareToPlace->getState();
-    qDebug() << "resdaada" << squareBoard->getSquares().at(0)->getState();
-    //scene->removeItem(squareToReplace);
+    qDebug() << "index woda po" << squareBoard->getSquares().indexOf(squareToReplace) << squareToReplace->getState();
+    qDebug() << "index statek po" << squareBoard->getSquares().indexOf(squareToPlace);
+    qDebug() << "sten statek po umieszczeniu" << squareToPlace->getState();
+    qDebug() << "pierwsze pole po umieszczeniu" << squareBoard->getSquares().at(0)->getState();
+    scene->removeItem(squareToReplace);
+    squareBoard->getSquares().operator [](stala)=squareToPlace;
+    qDebug() << "index statek po po" << squareBoard->getSquares().indexOf(squareToReplace);
+    qDebug() << "index statek po po" << squareBoard->getSquares().indexOf(squareToPlace);
     squareToPlace->setIsPlaced(true);
     squareToPlace = NULL;
 
