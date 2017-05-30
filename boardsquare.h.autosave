@@ -1,0 +1,31 @@
+#ifndef SQUARE_H
+#define SQUARE_H
+
+#include <QGraphicsRectItem>
+
+class BoardSquare: public QGraphicsRectItem{
+public:
+    // constructors
+    Hex(QGraphicsItem* parent=NULL);
+    // getters
+    state getState();
+
+    // setters
+    void setState();
+
+private:
+    QString owner;
+    state state_;
+
+};
+
+enum state
+{               
+    unknown,    // 
+    miss,       // 
+    hit,        // 
+    sinked,
+    ship   // 
+};
+
+#endif // SQUARE_H
