@@ -8,31 +8,19 @@
 #include<boost/asio.hpp>
 #include<boost/asio/ip/tcp.hpp>
 #include<boost/algorithm/string.hpp>
+#include "Klient.h"
 
-using namespace std;
-using namespace boost;
-using namespace boost::asio;
-using namespace boost::asio::ip;
 
-typedef boost::shared_ptr<tcp::socket> socket_ptr;
 typedef boost::shared_ptr<string> string_ptr;
 
 
-io_service service; 
-tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6000); 
+io_service service;
+tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6004);
 
-
-void readThread(socket_ptr);
-void writeThread(socket_ptr);
-
-
-Klient::Klient(){
-        startKlient();
-}
-
-void startKlient()
+int Klient::startKlient()
 {
      cout << "Connection established" << endl;
+
     try
     {
         boost::thread_group threads;
@@ -42,8 +30,8 @@ void startKlient()
 
         cout << "Connection established" << endl;
 
-        threads.create_thread(boost::bind(readThread, socket));
-        threads.create_thread(boost::bind(writeThread, socket));
+        threads.create_thread(boost::bind(&Klient::readThread,this, socket));
+        threads.create_thread(boost::bind(&Klient::writeThread,this, socket));
 
         threads.join_all();
     }
@@ -57,7 +45,7 @@ void startKlient()
 
 
 
-void writeThread(socket_ptr sock)
+void Klient::writeThread(socket_ptr sock)
 {
 
 	int size = 32;
@@ -84,7 +72,7 @@ void writeThread(socket_ptr sock)
 
 }
 
-void readThread(socket_ptr sock)
+void Klient::readThread(socket_ptr sock)
 {
 
 	int size = 32;
