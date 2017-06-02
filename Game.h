@@ -7,6 +7,9 @@
 #include "squareboard.h"
 #include "Square.h"
 #include "CreateShip.h"
+#include <QTextEdit>
+#include <QDialog>
+#include <QString>
 
 class Game: public QGraphicsView{
     Q_OBJECT
@@ -28,6 +31,9 @@ public:
     //void removeUsedShip(Square square, int quantity);
     // public attributes
 
+    QString ipAdress;
+    QString port;
+    bool pickedKlient;
     QList<int> list;
     QGraphicsScene* scene;
     SquareBoard* squareBoard;
@@ -44,6 +50,7 @@ public slots:
     void RulesWindow();
     void displayMainMenu();
     void displayGameWindow();
+    void displayLoggWindow();
 };
 
 #endif // GAME_H

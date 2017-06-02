@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Button.h"
 #include "squareboard.h"
+#include "dialog.h"
 #include <QGraphicsTextItem>
 #include <QDebug>
 
@@ -60,6 +61,7 @@ void Game::placeShip(Square *squareToReplace){
 }
 
 void Game::start(){
+
     // clear the screen
     scene->clear();
         qDebug() << "dupa";
@@ -82,7 +84,7 @@ void Game::start(){
     int bxPos = this->width()/2 - backButton->boundingRect().width()/2;
     int byPos = 600;
     backButton->setPos(bxPos,byPos);
-    connect(backButton,SIGNAL(clicked()),this,SLOT(displayMainMenu()));
+    connect(backButton,SIGNAL(clicked()),this,SLOT(displayLoggWindow()));
     scene->addItem(backButton);
 
     // create the done placing ships button
@@ -133,7 +135,7 @@ void Game::displayMainMenu(){
     int bxPos = this->width()/2 - playButton->boundingRect().width()/2;
     int byPos = 275;
     playButton->setPos(bxPos,byPos);
-    connect(playButton,SIGNAL(clicked()),this,SLOT(start()));
+    connect(playButton,SIGNAL(clicked()),this,SLOT(displayLoggWindow()));
     scene->addItem(playButton);
 
     // creat the rules button
@@ -153,12 +155,22 @@ void Game::displayMainMenu(){
     scene->addItem(quitButton);
 }
 
-void Game::displayGameWindow()
-{
+void Game::displayGameWindow(){
     list = getStates(squareBoard);
     qDebug() << "Lista indeksów:" << list;
 
     squareBoard->placeSquares(520,10,10,10,unknown);
+
+}
+
+void Game::displayLoggWindow(){
+    Dialog MyDialog;
+    MyDialog.setModal(true);
+    MyDialog.exec();
+
+    ipAdress = MyDialog.getIpAdress();
+    pickedKlient = MyDialog.getPickedKlient();
+    port = MyDialog.getPort();
 
 }
 
