@@ -15,11 +15,11 @@ typedef boost::shared_ptr<string> string_ptr;
 
 
 io_service service;
-tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6004);
+tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6003);
 
 int Klient::startKlient()
 {
-     cout << "Connection established" << endl;
+
 
     try
     {
@@ -28,10 +28,11 @@ int Klient::startKlient()
         socket_ptr socket(new tcp::socket(service));
         socket->connect(endpoint);
 
-        cout << "Connection established" << endl;
+
 
         threads.create_thread(boost::bind(&Klient::readThread,this, socket));
         threads.create_thread(boost::bind(&Klient::writeThread,this, socket));
+        cout << "Connection established" << endl;
 
         threads.join_all();
     }
