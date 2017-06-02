@@ -1,4 +1,4 @@
-#pragma once
+
 #ifndef SERWER_H
 #define SERWER_H
 
@@ -16,6 +16,7 @@ typedef boost::shared_ptr<tcp::socket> socket_ptr;
 
 class Serwer{
 public:
+
 
     int startSerwer();
     void acceptorLoop();

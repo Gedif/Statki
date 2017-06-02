@@ -47,10 +47,10 @@ int Serwer:: startSerwer()
 
 
     threads.create_thread(boost::bind(&Serwer::readThread,this,boost::ref(clientSock)));
-    boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
+   // boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
 
     threads.create_thread(boost::bind(&Serwer::writeThread,this,boost::ref(clientSock)));
-    boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
+   // boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
 
     //threads.join_all();
 
