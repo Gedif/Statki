@@ -9,13 +9,13 @@
 #include<boost/asio/ip/tcp.hpp>
 #include<boost/algorithm/string.hpp>
 #include "Klient.h"
-
+#include "Message.h"
 
 typedef boost::shared_ptr<string> string_ptr;
 
 
 io_service service;
-tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6003);
+tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6006);
 
 int Klient::startKlient()
 {
@@ -48,24 +48,19 @@ int Klient::startKlient()
 
 void Klient::writeThread(socket_ptr sock)
 {
-
+    Message* mess = new Message();
 	int size = 32;
-	char userInput[32] = { 0 };
 	string outMessage;
 
 	for (;;)
 	{
-		cin.getline(userInput, size);
-		outMessage = (string)userInput;
 
-		if (!outMessage.empty())
+
+        if (!mess->getText().empty())
 		{
-			sock->write_some(buffer(outMessage, size));
+            sock->write_some(buffer(mess.getText(), size));
 		}
 
-		
-		if (outMessage.find("exit") != string::npos)
-			exit(1); 
 
 		outMessage.clear();
 		
@@ -88,7 +83,7 @@ void Klient::readThread(socket_ptr sock)
 			bytesRead = sock->read_some(buffer(enemyOutput, size));
 			string_ptr inMessage(new string(enemyOutput, bytesRead));
 			
-			cout <<  *inMessage  << endl;
+            mess.setText(inMessage);
 		}
 
 	

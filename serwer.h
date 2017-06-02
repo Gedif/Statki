@@ -19,7 +19,6 @@ public:
 
 
     int startSerwer();
-    void acceptorLoop();
     void readThread(socket_ptr clientSock);
     void writeThread(socket_ptr clientSock);
 

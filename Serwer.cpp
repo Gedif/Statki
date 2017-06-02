@@ -58,20 +58,6 @@ int Serwer:: startSerwer()
     return 0;
 }
 
-void Serwer::acceptorLoop()
-{
-    cout << "Waiting for clients..." << endl;
-
-    for (;;)
-    {
-        socket_ptr clientSock(new tcp::socket(service2));
-
-        acceptor.accept(*clientSock);
-
-        cout << "New client joined! ";
-
-    }
-}
 
 void Serwer::readThread(socket_ptr clientSock)
 {

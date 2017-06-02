@@ -21,12 +21,4 @@ public:
 };
 
 
-
-
-
-
-
-
-
-
 #endif // KLIENT_H
