@@ -3,6 +3,9 @@
 
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QList>
+
+
 enum state
 {
     unknown,    //
@@ -19,17 +22,20 @@ public:
     Square(QGraphicsItem* parent=NULL);
     // getters
     int getState();
-    bool getIsPlaced();
+
 
     //event
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
 
+
+
     // setters
     void setState(state satateOfSquare);
-    void setIsPlaced(bool isIt);
+
+
 
 private:
-    bool isPlaced;
+
     QString owner;
     state state_;
 

@@ -22,13 +22,15 @@ void SquareBoard::placeSquares(int x, int y, int cols, int rows,state state){
 
 }
 
+
+
 void SquareBoard::createSquaresColumn(int x, int y, int numOfRows, state state){
     // creates a column of Squares at the specified location with the specified
     // number of rows
     for (size_t i = 0, n = numOfRows; i < n; i++){
         Square* square = new Square();
         square->setPos(x,y+50*i);
-        square->setIsPlaced(true);
+        //square->setIsPlaced(true);
         if (state == unknown){
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
@@ -44,4 +46,13 @@ void SquareBoard::createSquaresColumn(int x, int y, int numOfRows, state state){
         squares.append(square);
         game->scene->addItem(square);
     }
+}
+
+void SquareBoard::setListOfBlockedSquares(int indexOfShip)
+{
+    listOfBlockedSquares.append(indexOfShip-11);
+    listOfBlockedSquares.append(indexOfShip-9);
+    listOfBlockedSquares.append(indexOfShip+11);
+    listOfBlockedSquares.append(indexOfShip+9);
+   // QDebug << listOfBlockedSquares;
 }

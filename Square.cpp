@@ -13,7 +13,7 @@ Square::Square(QGraphicsItem *parent){
     setState(unknown);
     // allow responding to hover events
     setAcceptHoverEvents(true);
-    isPlaced = false;
+//    isPlaced = false;
 
 }
 
@@ -21,18 +21,16 @@ int Square::getState(){
     return state_;
 }
 
-bool Square::getIsPlaced(){
-    return isPlaced;
-}
+
 
 void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
     qDebug() << getState();
     if (getState() == ship){
-        qDebug() << "ifdupaa" << getIsPlaced() << getState();
+        qDebug() << "jesli to statek podnies"  << getState();
         game->pickUpShip(this);
     }
-    else if (getState() == unknown && game->squareToPlace != NULL){
-       qDebug() << "ifdupa";
+    else if (getState() == unknown && game->squareToPlace != NULL ) {
+       qDebug() << "jesli to woda, masz co położyć";
        game->placeShip(this);
     }
     else {
@@ -40,14 +38,9 @@ void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
     }
 }
 
-
-
-
-
 void Square::setState(state stateOfSquare){
     state_ = stateOfSquare;
 }
 
-void Square::setIsPlaced(bool isIt){
-    isPlaced = isIt;
-}
+
+

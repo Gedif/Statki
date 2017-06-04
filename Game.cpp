@@ -50,13 +50,28 @@ void Game::pickUpShip(Square* square){
 void Game::placeShip(Square *squareToReplace){
     //replaces the specified square with the square to place
     qDebug() << "statek przed" << squareBoard->getSquares().indexOf(squareToPlace);
-    squareToPlace->setPos(squareToReplace->pos());
-    qDebug() << "index to replace"<< squareBoard->getSquares().indexOf(squareToReplace);;
-    squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace))=squareToPlace;
-    squareBoard->getSquares().removeAll(squareToReplace);
-    qDebug() << "stan statek" << squareToPlace->getState();
-    squareToPlace->setIsPlaced(true);
+
+    qDebug() << "index to replace"<< squareBoard->getSquares().indexOf(squareToReplace);
+    qDebug() << squareBoard->listOfBlockedSquares.isEmpty();
+    if (squareBoard->listOfBlockedSquares.indexOf(squareBoard->getSquares().indexOf(squareToReplace))== -1 || squareBoard->listOfBlockedSquares.isEmpty() ){
+        squareToPlace->setPos(squareToReplace->pos());
+        //block corner squares
+        squareBoard->setListOfBlockedSquares(squareBoard->getSquares().indexOf(squareToReplace));
+        qDebug() << squareBoard->listOfBlockedSquares;
+        //replace
+        squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace))=squareToPlace;
+        squareBoard->getSquares().removeAll(squareToReplace);
+        qDebug() << "stan statek" << squareToPlace->getState();
+        //squareToPlace->setIsPlaced(true);
+    }
+    else{
+
+    qDebug() << "nie można";
+    return;
+    }
     squareToPlace = NULL;
+
+
 
 
 }
@@ -172,19 +187,7 @@ void Game::displayLoggWindow(){
 
     pickedKlient = MyDialog.getPickedKlient();
 
-    if(pickedKlient == 0){
-        ipAdress = MyDialog.getIpAdress();
-        port = MyDialog.getPort();
-        Klient* kli = new Klient();
-        kli->setIpadress(ipAdress.toStdString());
-        kli->setPort(port.toInt());
-        boost::thread t2{&Klient::startKlient,kli};
-    }else{
-        port = MyDialog.getPort();
-        Serwer* ser = new Serwer();
-        ser->setPort(port.toInt());
-        boost::thread t2{&Serwer::startSerwer,ser};
-    }
+
 }
 
 QList<int> Game::getStates(SquareBoard* board){
