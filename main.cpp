@@ -9,10 +9,10 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
-    Serwer* serw = new Serwer();
-    boost::thread t1{&Serwer::startSerwer,serw};
-   // Klient* kli = new Klient();
-    //boost::thread t2{&Klient::startKlient,kli};
+    //Serwer* serw = new Serwer();
+    //boost::thread t1{&Serwer::startSerwer,serw};
+    Klient* kli = new Klient();
+    boost::thread t2{&Klient::startKlient,kli};
 
 
     game = new Game();

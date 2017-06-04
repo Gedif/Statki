@@ -21,7 +21,11 @@ public:
     int startSerwer();
     void readThread(socket_ptr clientSock);
     void writeThread(socket_ptr clientSock);
+    int getPort() const;
+    void setPort(int value);
 
+private:
+    int port;
 
 };
 

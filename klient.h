@@ -15,9 +15,20 @@ typedef boost::shared_ptr<tcp::socket> socket_ptr;
 
 class Klient{
 public:
+
     int startKlient();
     void readThread(socket_ptr sock);
     void writeThread(socket_ptr sock);
+    string getIpadress() const;
+    void setIpadress(const string &value);
+    int getPort() const;
+    void setPort(int value);
+
+private:
+    string ipadress;
+    int port;
+    string messageFromServer;
+    string messageToServer;
 };
 
 

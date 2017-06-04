@@ -9,13 +9,14 @@
 #include<boost/asio/ip/tcp.hpp>
 #include<boost/algorithm/string.hpp>
 #include "Klient.h"
-#include "Message.h"
 
 typedef boost::shared_ptr<string> string_ptr;
 
 
 io_service service;
 tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6006);
+
+
 
 int Klient::startKlient()
 {
@@ -48,7 +49,6 @@ int Klient::startKlient()
 
 void Klient::writeThread(socket_ptr sock)
 {
-    Message* mess = new Message();
 	int size = 32;
 	string outMessage;
 
@@ -56,34 +56,54 @@ void Klient::writeThread(socket_ptr sock)
 	{
 
 
-        if (!mess->getText().empty())
+        if (!messageToServer.empty())
 		{
-            sock->write_some(buffer(mess.getText(), size));
+            sock->write_some(buffer(messageToServer, size));
 		}
 
 
-		outMessage.clear();
+        messageToServer.clear();
 		
 	}
 
 }
 
+string Klient::getIpadress() const
+{
+    return ipadress;
+}
+
+void Klient::setIpadress(const string &value)
+{
+    ipadress = value;
+}
+
+int Klient::getPort() const
+{
+    return port;
+}
+
+void Klient::setPort(int value)
+{
+    port = value;
+}
+
 void Klient::readThread(socket_ptr sock)
 {
 
-	int size = 32;
-	int bytesRead = 0;
-	char enemyOutput[1024] = { 0 };
-	//string inMessage ;
+    int size = 32;
+    int bytesRead = 0;
+    char enemyOutput[1024] = { 0 };
+    //string inMessage ;
 
 	for (;;)
 	{
 		if (sock->available())
 		{
 			bytesRead = sock->read_some(buffer(enemyOutput, size));
-			string_ptr inMessage(new string(enemyOutput, bytesRead));
+            string_ptr inMessage(new string(enemyOutput, bytesRead));
 			
-            mess.setText(inMessage);
+            messageFromServer = *inMessage;
 		}
 
 	

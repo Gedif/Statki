@@ -107,3 +107,13 @@ void Serwer::writeThread(socket_ptr clientSock)
     }
 }
 
+int Serwer::getPort() const
+{
+    return port;
+}
+
+void Serwer::setPort(int value)
+{
+    port = value;
+}
+
