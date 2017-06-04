@@ -23,6 +23,7 @@ public:
 
 
     //public attributes
+
      QList<Square*> squares;
      QList<int> listOfBlockedSquares;
 private:

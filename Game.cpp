@@ -83,7 +83,10 @@ void Game::placeShip(Square *squareToReplace){
 
 void Game::shoot(Square *squareToShoot){
     qDebug() << squareBoard->squares.indexOf(squareToShoot);
-    if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100)){
+    if (squareBoard->squares.indexOf(squareToShoot) < 100 ){
+        return;
+    }
+    else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) ){
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(Qt::red);
@@ -95,7 +98,6 @@ void Game::shoot(Square *squareToShoot){
         brush.setColor(Qt::green);
         squareToShoot->setBrush(brush);
     }
-    changeTurn();
 }
 
 void Game::shootAdd(Square *squareToShoot){
