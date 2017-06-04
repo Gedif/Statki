@@ -24,8 +24,18 @@ public:
     int getPort() const;
     void setPort(int value);
 
+
+
+    string getMessageFromKlient() const;
+    void setMessageFromKlient(const string &value);
+
+    string getMessageToKlient() const;
+    void setMessageToKlient(const string &value);
+
 private:
     int port;
+    string messageFromKlient;
+    string messageToKlient;
 
 };
 

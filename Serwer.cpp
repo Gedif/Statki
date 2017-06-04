@@ -16,8 +16,7 @@ typedef map<socket_ptr, string_ptr> clientMap;
 typedef boost::shared_ptr<clientMap> clientMap_ptr;
 typedef boost::shared_ptr< list<socket_ptr> > clientList_ptr;
 
-io_service service2;
-tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(), 6003));
+
 clientList_ptr clientList(new list<socket_ptr>);
 
 enum sleepLen // Time is in milliseconds
@@ -30,7 +29,8 @@ enum sleepLen // Time is in milliseconds
 
 int Serwer:: startSerwer()
 {
-
+    io_service service2;
+    tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),port));
     cout << "Waiting for clients..." << endl;
 
         socket_ptr clientSock(new tcp::socket(service2));
@@ -74,7 +74,7 @@ void Serwer::readThread(socket_ptr clientSock)
 
                     string_ptr inMessage(new string(enemyOutput, bytesRead));
 
-                    cout << *inMessage<< endl;
+                    messageFromKlient = *inMessage;
                 }
 
         //boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
@@ -95,13 +95,13 @@ void Serwer::writeThread(socket_ptr clientSock)
             cin.getline(userInput, size);
             outMessage = (string)userInput;
 
-            if (!outMessage.empty())
+            if (!messageToKlient.empty())
             {
-                clientSock->write_some(buffer(outMessage, size));
+                clientSock->write_some(buffer(messageToKlient, size));
             }
 
 
-            outMessage.clear();
+
 
         //boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
     }
@@ -116,4 +116,26 @@ void Serwer::setPort(int value)
 {
     port = value;
 }
+
+string Serwer::getMessageFromKlient() const
+{
+    return messageFromKlient;
+}
+
+void Serwer::setMessageFromKlient(const string &value)
+{
+    messageFromKlient = value;
+}
+
+string Serwer::getMessageToKlient() const
+{
+    return messageToKlient;
+}
+
+void Serwer::setMessageToKlient(const string &value)
+{
+    messageToKlient = value;
+}
+
+
 

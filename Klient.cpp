@@ -13,15 +13,13 @@
 typedef boost::shared_ptr<string> string_ptr;
 
 
-io_service service;
-tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 6006);
 
 
 
 int Klient::startKlient()
 {
-
-
+    io_service service;
+    tcp::endpoint endpoint(ip::address::from_string(ipadress), port);
     try
     {
         boost::thread_group threads;
@@ -60,9 +58,6 @@ void Klient::writeThread(socket_ptr sock)
 		{
             sock->write_some(buffer(messageToServer, size));
 		}
-
-
-        messageToServer.clear();
 		
 	}
 
@@ -73,7 +68,7 @@ string Klient::getIpadress() const
     return ipadress;
 }
 
-void Klient::setIpadress(const string &value)
+void Klient::setIpadress( string &value)
 {
     ipadress = value;
 }
@@ -94,7 +89,6 @@ void Klient::readThread(socket_ptr sock)
     int size = 32;
     int bytesRead = 0;
     char enemyOutput[1024] = { 0 };
-    //string inMessage ;
 
 	for (;;)
 	{

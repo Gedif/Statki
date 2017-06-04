@@ -20,7 +20,7 @@ public:
     void readThread(socket_ptr sock);
     void writeThread(socket_ptr sock);
     string getIpadress() const;
-    void setIpadress(const string &value);
+    void setIpadress( string &value);
     int getPort() const;
     void setPort(int value);
 

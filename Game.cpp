@@ -1,10 +1,11 @@
 #include "Game.h"
 #include "Button.h"
 #include "squareboard.h"
-#include "dialog.h"
+#include "Dialog.h"
 #include <QGraphicsTextItem>
 #include <QDebug>
-
+#include "Klient.h"
+#include "Serwer.h"
 
 Game::Game(QWidget *parent){
     // set up the screen
@@ -168,10 +169,22 @@ void Game::displayLoggWindow(){
     MyDialog.setModal(true);
     MyDialog.exec();
 
-    ipAdress = MyDialog.getIpAdress();
-    pickedKlient = MyDialog.getPickedKlient();
-    port = MyDialog.getPort();
 
+    pickedKlient = MyDialog.getPickedKlient();
+
+    if(pickedKlient == 0){
+        ipAdress = MyDialog.getIpAdress();
+        port = MyDialog.getPort();
+        Klient* kli = new Klient();
+        kli->setIpadress(ipAdress.toStdString());
+        kli->setPort(port.toInt());
+        boost::thread t2{&Klient::startKlient,kli};
+    }else{
+        port = MyDialog.getPort();
+        Serwer* ser = new Serwer();
+        ser->setPort(port.toInt());
+        boost::thread t2{&Serwer::startSerwer,ser};
+    }
 }
 
 QList<int> Game::getStates(SquareBoard* board){
