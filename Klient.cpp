@@ -14,7 +14,7 @@ typedef boost::shared_ptr<string> string_ptr;
 
 
 io_service service;
-tcp::endpoint endpoint(ip::address::from_string("10.1.119.218"), 7008);
+tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 7030);
 
 
 int Klient::startKlient()
@@ -57,7 +57,7 @@ void Klient::writeThread(socket_ptr sock)
 		{
             sock->write_some(buffer(messageToServer, size));
 		}
-		
+        messageToServer.clear();
 	}
 
 }

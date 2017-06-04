@@ -26,36 +26,38 @@ enum sleepLen // Time is in milliseconds
 };
 
 io_service service2;
-tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),7006));
+tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),7030));
 
 int Serwer:: startSerwer()
 {
     cout << "Waiting for clients..." << endl;
 
         socket_ptr clientSock(new tcp::socket(service2));
-
+        cout << "1" << endl;
         acceptor.accept(*clientSock);
+        cout << "New client joined! " << endl;
+        cout << "2" << endl;
 
-        cout << "New client joined! ";
 
 
 
 
     boost::thread_group threads;
+    cout << "5" << endl;
 
 
-
-    threads.create_thread(boost::bind(&Serwer::readThread,this,boost::ref(clientSock)));
-   // boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
-
-    threads.create_thread(boost::bind(&Serwer::writeThread,this,boost::ref(clientSock)));
-   // boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
-
+   threads.create_thread(boost::bind(&Serwer::readThread,this,boost::ref(clientSock)));
+    boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
+    cout << "4" << endl;
+   threads.create_thread(boost::bind(&Serwer::writeThread,this,boost::ref(clientSock)));
+    boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
+    cout << "3" << endl;
     //threads.join_all();
 
 
     return 0;
 }
+
 
 
 void Serwer::readThread(socket_ptr clientSock)
@@ -73,12 +75,13 @@ void Serwer::readThread(socket_ptr clientSock)
 
                     string_ptr inMessage(new string(enemyOutput, bytesRead));
 
-                    messageFromKlient = *inMessage;
+                    cout << *inMessage<< endl;
                 }
 
-        //boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
+       boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
     }
 }
+
 
 
 
@@ -91,20 +94,18 @@ void Serwer::writeThread(socket_ptr clientSock)
         string outMessage;
 
 
-            cin.getline(userInput, size);
-            outMessage = (string)userInput;
-
             if (!messageToKlient.empty())
             {
                 clientSock->write_some(buffer(messageToKlient, size));
             }
 
 
+        messageToKlient.clear();
 
-
-        //boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
+        boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
     }
 }
+
 
 int Serwer::getPort() const
 {
