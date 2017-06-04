@@ -13,13 +13,12 @@
 typedef boost::shared_ptr<string> string_ptr;
 
 
-
+io_service service;
+tcp::endpoint endpoint(ip::address::from_string("10.1.119.218"), 7008);
 
 
 int Klient::startKlient()
 {
-    io_service service;
-    tcp::endpoint endpoint(ip::address::from_string(ipadress), port);
     try
     {
         boost::thread_group threads;

@@ -25,12 +25,11 @@ enum sleepLen // Time is in milliseconds
     lon = 200
 };
 
-
+io_service service2;
+tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),7006));
 
 int Serwer:: startSerwer()
 {
-    io_service service2;
-    tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),port));
     cout << "Waiting for clients..." << endl;
 
         socket_ptr clientSock(new tcp::socket(service2));

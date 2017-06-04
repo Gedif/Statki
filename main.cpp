@@ -11,13 +11,11 @@ int main(int argc, char *argv[])
 
 
    Klient* kli = new Klient();
-    kli->setIpadress("127.0.0.1");
-    kli->setPort(7002);
-   boost::thread t2{&Klient::startKlient,kli};
+
+  boost::thread t2{&Klient::startKlient,kli};
 
 
     //Serwer* ser = new Serwer();
-   // ser->setPort(7000);
     //boost::thread t2{&Serwer::startSerwer,ser};
 
     game = new Game();
