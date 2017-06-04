@@ -22,7 +22,7 @@ public:
     Square(QGraphicsItem* parent=NULL);
     // getters
     int getState();
-
+    bool getIsPlaced();
 
     //event
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
@@ -31,11 +31,11 @@ public:
 
     // setters
     void setState(state satateOfSquare);
-
+    void setIsPlaced(bool isIt);
 
 
 private:
-
+    bool isPlaced;
     QString owner;
     state state_;
 

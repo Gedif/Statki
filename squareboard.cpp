@@ -48,11 +48,17 @@ void SquareBoard::createSquaresColumn(int x, int y, int numOfRows, state state){
     }
 }
 
-void SquareBoard::setListOfBlockedSquares(int indexOfShip)
-{
+void SquareBoard::setListOfBlockedSquares(int indexOfShip){
     listOfBlockedSquares.append(indexOfShip-11);
     listOfBlockedSquares.append(indexOfShip-9);
     listOfBlockedSquares.append(indexOfShip+11);
     listOfBlockedSquares.append(indexOfShip+9);
-   // QDebug << listOfBlockedSquares;
+    // QDebug << listOfBlockedSquares;
+}
+
+void SquareBoard::clearBlockedSquares(int indexOfPickedShip){
+    listOfBlockedSquares.removeOne(indexOfPickedShip-11);
+    listOfBlockedSquares.removeOne(indexOfPickedShip-9);
+    listOfBlockedSquares.removeOne(indexOfPickedShip+11);
+    listOfBlockedSquares.removeOne(indexOfPickedShip+9);
 }

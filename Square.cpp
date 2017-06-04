@@ -21,26 +21,45 @@ int Square::getState(){
     return state_;
 }
 
+bool Square::getIsPlaced(){
+    return isPlaced;
+}
+
 
 
 void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
     qDebug() << getState();
-    if (getState() == ship){
-        qDebug() << "jesli to statek podnies"  << getState();
-        game->pickUpShip(this);
-    }
-    else if (getState() == unknown && game->squareToPlace != NULL ) {
-       qDebug() << "jesli to woda, masz co położyć";
-       game->placeShip(this);
-    }
-    else {
+    if(game->whosTurn == "NOONE"){
+        //układanie statkow
+        if (getState() == ship){
+            qDebug() << "jesli to statek podnies"  << getState();
+            game->pickUpShip(this);
+        }
+        else if (getState() == unknown && game->squareToPlace != NULL ) {
+            qDebug() << "jesli to woda, masz co położyć";
+            game->placeShip(this);
+        }
+        else {
         return;
+        }
+    }
+    else{
+        //strzelanie
+        qDebug() << "szczela";
+    game->shoot(this);
+
     }
 }
 
 void Square::setState(state stateOfSquare){
     state_ = stateOfSquare;
 }
+
+void Square::setIsPlaced(bool isIt){
+    isPlaced = isIt;
+}
+
+
 
 
 

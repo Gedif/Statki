@@ -15,6 +15,7 @@ public:
     QList<Square*> getSquares();
     QList<int> getListOfBlockedSquares();
     void setListOfBlockedSquares(int indexOfShip);
+    void clearBlockedSquares(int indexOfPickedShip);
 
     // public methods
 

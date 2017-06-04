@@ -28,6 +28,9 @@ public:
 
     void pickUpShip(Square* square);
     void placeShip(Square *squareToReplace);
+    void shoot(Square* squareToShoot);
+    QString getWhosTurn();
+    void changeTurn();
     //void removeUsedShip(Square square, int quantity);
     // public attributes
 

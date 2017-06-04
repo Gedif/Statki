@@ -39,11 +39,18 @@ void Game::mousePressEvent(QMouseEvent *event){
 
 void Game::pickUpShip(Square* square){
     //pick up specified ship
-    if (squareToPlace == NULL){
+    if (squareToPlace == NULL && square->getIsPlaced() == true){
     squareToPlace = square;
     originalPos = square->pos();
-   // squareToPlace->setIsPlaced(true);
+    // squareToPlace->setIsPlaced(true);
+    // delete indexs's of blocked squares from list
+    squareBoard->clearBlockedSquares(squareBoard->getSquares().indexOf(square));
+    squareBoard->squares.operator [](squareBoard->squares.indexOf(square))= squareToPlace;
     return;
+    }
+    else{
+        squareToPlace = square;
+        originalPos = square->pos();
     }
 }
 
@@ -59,7 +66,8 @@ void Game::placeShip(Square *squareToReplace){
         squareBoard->setListOfBlockedSquares(squareBoard->getSquares().indexOf(squareToReplace));
         qDebug() << squareBoard->listOfBlockedSquares;
         //replace
-        squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace))=squareToPlace;
+        squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace)) = squareToPlace;
+        qDebug() << "index square to replace" << squareBoard->squares.indexOf(squareToReplace);
         squareBoard->getSquares().removeAll(squareToReplace);
         qDebug() << "stan statek" << squareToPlace->getState();
         //squareToPlace->setIsPlaced(true);
@@ -69,17 +77,44 @@ void Game::placeShip(Square *squareToReplace){
     qDebug() << "nie można";
     return;
     }
-    squareToPlace = NULL;
+    squareToPlace = NULL;    
+}
 
+void Game::shoot(Square *squareToShoot){
+    qDebug() << squareBoard->squares.indexOf(squareToShoot);
+    if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100)){
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::red);
+        squareToShoot->setBrush(brush);
+        }
+    else{
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::green);
+        squareToShoot->setBrush(brush);
+    }
+    changeTurn();
+}
 
+QString Game::getWhosTurn(){
+return whosTurn;
+}
 
-
+void Game::changeTurn(){
+    if(whosTurn == "NOONE" || whosTurn == "PLAYER1"){
+    whosTurn = "PLAYER2";
+    }
+    else{
+    whosTurn = "PLAYER1";
+    }
 }
 
 void Game::start(){
 
     // clear the screen
     scene->clear();
+    whosTurn = "NOONE";
         qDebug() << "dupa";
     // test code TODO remove
 
@@ -174,6 +209,7 @@ void Game::displayMainMenu(){
 void Game::displayGameWindow(){
     list = getStates(squareBoard);
     qDebug() << "Lista indeksów:" << list;
+    whosTurn="PLAYER1";
 
     squareBoard->placeSquares(520,10,10,10,unknown);
 
@@ -191,7 +227,7 @@ void Game::displayLoggWindow(){
         port = MyDialog.getPort();
         Klient* kli = new Klient();
         kli->setIpadress(ipAdress.toStdString());
-         kli->setPort(port.toInt());
+        kli->setPort(port.toInt());
        boost::thread t2{&Klient::startKlient,kli};
     }else{
         port = MyDialog.getPort();
