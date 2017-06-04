@@ -68,7 +68,7 @@ string Klient::getIpadress() const
     return ipadress;
 }
 
-void Klient::setIpadress( string &value)
+void Klient::setIpadress( string value)
 {
     ipadress = value;
 }
