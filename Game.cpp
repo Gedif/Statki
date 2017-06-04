@@ -7,6 +7,7 @@
 #include "Klient.h"
 #include "Serwer.h"
 
+
 Game::Game(QWidget *parent){
     // set up the screen
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -95,6 +96,33 @@ void Game::shoot(Square *squareToShoot){
         squareToShoot->setBrush(brush);
     }
     changeTurn();
+}
+
+void Game::shootAdd(Square *squareToShoot){
+    qDebug() << squareBoard->squares.indexOf(squareToShoot);
+    if(whosTurn == "PLAYER1"){
+        indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
+    }
+
+}
+
+void Game::shootReceived(string indexReceived){
+
+    if(whosTurn == "PLAYER2"){
+        if (list.contains(std::stoi(indexReceived)-100)){
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::red);
+        squareBoard->squares.takeAt(std::stoi(indexReceived)-100)->setBrush(brush);
+        }
+    else{
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::black);
+        squareBoard->squares.takeAt(std::stoi(indexReceived)-100)->setBrush(brush);
+    }
+    changeTurn();
+    }
 }
 
 QString Game::getWhosTurn(){
@@ -209,8 +237,13 @@ void Game::displayMainMenu(){
 void Game::displayGameWindow(){
     list = getStates(squareBoard);
     qDebug() << "Lista indeksów:" << list;
-    whosTurn="PLAYER1";
 
+
+    if(pickedKlient == 0){
+       whosTurn = "PLAYER2";
+    }else{
+        whosTurn = "PLAYER1";
+     }
     squareBoard->placeSquares(520,10,10,10,unknown);
 
 }
@@ -234,6 +267,7 @@ void Game::displayLoggWindow(){
          Serwer* ser = new Serwer();
          ser->setPort(port.toInt());
          boost::thread t2{&Serwer::startSerwer,ser};
+
      }
 
 }

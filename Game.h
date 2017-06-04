@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMouseEvent>
+#include <string>
 #include "squareboard.h"
 #include "Square.h"
 #include "CreateShip.h"
@@ -25,15 +26,16 @@ public:
 
 
     QList<int> getStates(SquareBoard* board);
-
+    int indexOfSquare;
     void pickUpShip(Square* square);
     void placeShip(Square *squareToReplace);
     void shoot(Square* squareToShoot);
     QString getWhosTurn();
+    void shootAdd(Square* squareToShoot);
+    void shootReceived(std::string index);
     void changeTurn();
     //void removeUsedShip(Square square, int quantity);
     // public attributes
-
     QString ipAdress;
     QString port;
     bool pickedKlient;
@@ -48,12 +50,15 @@ public:
     //QList<Square*> squares;
     QPointF originalPos;
     Square* squareToPlace = NULL;
+
+
 public slots:
     void start();
     void RulesWindow();
     void displayMainMenu();
     void displayGameWindow();
     void displayLoggWindow();
+private:
 };
 
 #endif // GAME_H

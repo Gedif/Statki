@@ -9,19 +9,21 @@
 #include<boost/asio/ip/tcp.hpp>
 #include<boost/algorithm/string.hpp>
 #include "Klient.h"
+#include "Game.h"
 
 typedef boost::shared_ptr<string> string_ptr;
 
 
-
+extern Game* game;
 io_service service;
-tcp::endpoint endpoint(ip::address::from_string("10.1.119.218"), 4520);
+tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 4520);
 
 int Klient::startKlient()
 {
 
     try
     {
+
         boost::thread_group threads;
 
         socket_ptr socket(new tcp::socket(service));
@@ -48,17 +50,17 @@ int Klient::startKlient()
 void Klient::writeThread(socket_ptr sock)
 {
 	int size = 32;
-	string outMessage;
 
 	for (;;)
 	{
 
-
-        if (!messageToServer.empty())
+        messageToServer = to_string(game->indexOfSquare);
+        cout << messageToServer << endl;
+        if (messageToServer != "1000" )
 		{
             sock->write_some(buffer(messageToServer, size));
 		}
-        messageToServer.clear();
+        messageToServer = "1000";
 	}
 
 }
@@ -98,6 +100,9 @@ void Klient::readThread(socket_ptr sock)
             string_ptr inMessage(new string(enemyOutput, bytesRead));
 			
             messageFromServer = *inMessage;
+            //if(messageFromServer != 1000){
+                game->shootReceived(messageFromServer);
+          //  }
 		}
 
 	

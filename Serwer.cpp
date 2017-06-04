@@ -10,6 +10,7 @@
 #include<boost/asio/ip/tcp.hpp>
 #include "Serwer.h"
 #include "Klient.h"
+#include "Game.h"
 
 typedef boost::shared_ptr<string> string_ptr;
 typedef map<socket_ptr, string_ptr> clientMap;
@@ -25,6 +26,7 @@ enum sleepLen // Time is in milliseconds
     lon = 200
 };
 
+extern Game* game;
 io_service service2;
 tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),4520));
 
@@ -76,7 +78,8 @@ void Serwer::readThread(socket_ptr clientSock)
 
                     string_ptr inMessage(new string(enemyOutput, bytesRead));
 
-                    cout << *inMessage<< endl;
+                    messageFromKlient = *inMessage;
+                    game->shootReceived(messageFromKlient);
                 }
 
        boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
@@ -91,17 +94,16 @@ void Serwer::writeThread(socket_ptr clientSock)
     for (;;)
     {
         int size = 32;
-        char userInput[32] = { 0 };
-        string outMessage;
 
 
-            if (!messageToKlient.empty())
+            messageToKlient = to_string(game->indexOfSquare);
+            if (messageToKlient != "1000")
             {
                 clientSock->write_some(buffer(messageToKlient, size));
             }
 
 
-        messageToKlient.clear();
+        messageToKlient = "1000";
 
         boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
     }
