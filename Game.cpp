@@ -273,6 +273,7 @@ void Game::displayGameWindow(){
     list = getStates(squareBoard);
     qDebug() << "Lista indeksów:" << list;
 
+    //squareBoard->checkNearby();
 
     if(pickedKlient == 0){
        whosTurn = "PLAYER2";
@@ -308,6 +309,7 @@ void Game::displayLoggWindow(){
 }
 
 QList<int> Game::getStates(SquareBoard* board){
+    list.clear();
     for (int i = 0; i < board->getSquares().size(); ++i) {
         if (board->getSquares().at(i)->getState() == 3)
             list.append(i);

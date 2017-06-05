@@ -30,14 +30,18 @@ public:
     // public methods
 
     void placeSquares(int x, int y, int cols, int rows,state state);
+    //void checkNearby();
     void checkNearby(int index);
 
     //public attributes
 
     QList<Square*> squares;
     QList<int> listOfBlockedSquares;
+    QList<int> ship1;
+    QList<int> ship2;
+    QList<int> ship3;
+    QList<int> ship4;
 private:
-    int nearby;
     void createSquaresColumn(int x, int y, int numOfRows,state state);
 
 };
