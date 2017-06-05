@@ -171,13 +171,13 @@ void Game::start(){
     squareBoard->clearBlockedSquares(-2);
 
     ship1 = new CreateShip();
-    ship1->placeSquares(600,20,1);
+    ship1->placeSquares(600,20,1,4);
     ship2 = new CreateShip();
-    ship2->placeSquares(600,20+50*2,2);
+    ship2->placeSquares(600,20+50*2,2,3);
     ship3 = new CreateShip();
-    ship3->placeSquares(600,20+50*4,3);
+    ship3->placeSquares(600,20+50*4,3,2);
     ship4 = new CreateShip();
-    ship4->placeSquares(600,20+50*6,4);
+    ship4->placeSquares(600,20+50*6,4,1);
 
     // create the clear button
     Button* clearButton = new Button(QString("Clear Setup"));

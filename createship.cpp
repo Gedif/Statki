@@ -14,9 +14,10 @@ void CreateShip::setNumOfSegments(int num){
     numOfSegments = num;
 }
 
-void CreateShip::placeSquares(int x, int y, int num_of_segment){
+void CreateShip::placeSquares(int x, int y, int num_of_segment, int numOfShips){
     //int X_SHIFT = 50;
     //for (size_t i = 0, n = num_of_segments; i < n; i++){
+    for(int i=0 ; i < numOfShips; ++i){
         Square* square = new Square();
         square->setLifeOfShip(num_of_segment);
         square->setState(ship);
@@ -31,4 +32,5 @@ void CreateShip::placeSquares(int x, int y, int num_of_segment){
         game->scene->addItem(square);
    // }
         setNumOfSegments(num_of_segment);
+    }
 }
