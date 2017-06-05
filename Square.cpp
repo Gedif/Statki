@@ -64,24 +64,12 @@ void Square::setIsPlaced(bool isIt){
     isPlaced = isIt;
 }
 
-void Square::incrementLifeOfShip(){
-    lifeOfSship_++;
+void Square::setLifeOfShip(int health_points){
+    lifeOfSship_ = health_points;
 }
 
-void Square::checkNearby(int index){
-    if (game->list.contains(index-10)){
-            lifeOfSship_++;
-    }
-    if (game->list.contains(index+10)){
-           lifeOfSship_++;
-    }
-    if (game->list.contains(index-1)){
-            lifeOfSship_++;
-    }
-    if (game->list.contains(index+1)){
-            lifeOfSship_++;
-    }
-}
+
+
 
 
 

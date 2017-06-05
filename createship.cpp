@@ -14,10 +14,11 @@ void CreateShip::setNumOfSegments(int num){
     numOfSegments = num;
 }
 
-void CreateShip::placeSquares(int x, int y, int numOfSegments){
+void CreateShip::placeSquares(int x, int y, int num_of_egments){
     int X_SHIFT = 50;
-    for (size_t i = 0, n = numOfSegments; i < n; i++){
+    for (size_t i = 0, n = num_of_egments; i < n; i++){
         Square* square = new Square();
+       // square->setLifeOfShip(num_of_egments);
         square->setState(ship);
         square->setPos(x+X_SHIFT*i,y);
         QBrush brush;
@@ -27,5 +28,5 @@ void CreateShip::placeSquares(int x, int y, int numOfSegments){
         ships.append(square);
         game->scene->addItem(square);
     }
-        setNumOfSegments(numOfSegments);
+        setNumOfSegments(num_of_egments);
 }

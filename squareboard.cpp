@@ -58,4 +58,75 @@ void SquareBoard::clearBlockedSquares(int indexOfPickedShip){
     listOfBlockedSquares.removeOne(indexOfPickedShip+9);
 }
 
+void SquareBoard::checkNearby(int index){
+    int LifePoints = squares.operator [](index)->getLifeOfShip();
+    int nearby = 0;
+    qDebug() << index;
+    if (index == 0){
+    qDebug() << index << "0";
+        if (game->list.contains(index+10)){
+               nearby++;
+               if (LifePoints < squares.operator [](index+10)->getLifeOfShip() )
+                   LifePoints = squares.operator [](index+10)->getLifeOfShip();
+        }
+        if (game->list.contains(index+1)){
+               nearby++;
+               if (LifePoints < squares.operator [](index+1)->getLifeOfShip() )
+                   LifePoints = squares.operator [](index+1)->getLifeOfShip();
+        }
+        squares.operator [](index)->setLifeOfShip(nearby+LifePoints);
+        squares.operator [](index+1)->setLifeOfShip(nearby+LifePoints);
+        squares.operator [](index+10)->setLifeOfShip(nearby+LifePoints);
+    }
+    else if (index < 10){
+        qDebug() << index << "< 10";
+        if (game->list.contains(index+10)){
+               nearby++;
+               if (LifePoints < squares.operator [](index+10)->getLifeOfShip() )
+                   LifePoints = squares.operator [](index+10)->getLifeOfShip();
+        }
+        if (game->list.contains(index+1)){
+               nearby++;
+               if (LifePoints < squares.operator [](index+1)->getLifeOfShip() )
+                   LifePoints = squares.operator [](index+1)->getLifeOfShip();
+        }
+        if (game->list.contains(index-1)){
+                 nearby++;
+               if (LifePoints < squares.operator [](index-1)->getLifeOfShip() )
+                    LifePoints = squares.operator [](index-1)->getLifeOfShip();
+        }
+        squares.operator [](index)->setLifeOfShip(nearby+LifePoints);
+        squares.operator [](index+1)->setLifeOfShip(nearby+LifePoints);
+        squares.operator [](index+10)->setLifeOfShip(nearby+LifePoints);
+        squares.operator [](index-1)->setLifeOfShip(nearby+LifePoints);
+    }
+    else{
+        qDebug() << index <<" >10";
+        if (game->list.contains(index+10)){
+               nearby++;
+               if (LifePoints < squares.operator [](index+10)->getLifeOfShip() )
+                   LifePoints = squares.operator [](index+10)->getLifeOfShip();
+        }
+        if (game->list.contains(index+1)){
+               nearby++;
+               if (LifePoints < squares.operator [](index+1)->getLifeOfShip() )
+                   LifePoints = squares.operator [](index+1)->getLifeOfShip();
+        }
+        if (game->list.contains(index-1)){
+                 nearby++;
+               if (LifePoints < squares.operator [](index-1)->getLifeOfShip() )
+                    LifePoints = squares.operator [](index-1)->getLifeOfShip();
+        }
+        if (game->list.contains(index-10)){
+                 nearby++;
+                 if (LifePoints < squares.operator [](index-10)->getLifeOfShip() )
+                LifePoints = squares.operator [](index-10)->getLifeOfShip();
+        }
+                squares.operator [](index)->setLifeOfShip(nearby+LifePoints);
+                squares.operator [](index-10)->setLifeOfShip(nearby+LifePoints);
+                squares.operator [](index+10)->setLifeOfShip(nearby+LifePoints);
+                squares.operator [](index-1)->setLifeOfShip(nearby+LifePoints);
+                squares.operator [](index+1)->setLifeOfShip(nearby+LifePoints);
+    }
 
+}

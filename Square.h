@@ -33,9 +33,9 @@ public:
     // setters
     void setState(state satateOfSquare);
     void setIsPlaced(bool isIt);
-    void incrementLifeOfShip();
+    void setLifeOfShip(int health_points);
     //Pubic methods
-    void checkNearby(int index);
+
 
 
 private:

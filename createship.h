@@ -16,7 +16,7 @@ public:
     void setNumOfSegments(int num);
 
     // public methods
-    void placeSquares(int x, int y, int numOfSegments);
+    void placeSquares(int x, int y, int num_of_egments);
 
 private:
     QList<Square*> ships;

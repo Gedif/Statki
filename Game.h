@@ -11,6 +11,7 @@
 #include <QTextEdit>
 #include <QDialog>
 #include <QString>
+#include <QDebug>
 
 class Game: public QGraphicsView{
     Q_OBJECT

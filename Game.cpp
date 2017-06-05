@@ -57,9 +57,12 @@ void Game::pickUpShip(Square* square){
     squareBoard->squares.operator [](squareBoard->squares.indexOf(square))= water;
     squareBoard->getSquares().removeAll(square);
     }
-    else{
+    else if (squareToPlace == NULL){
         squareToPlace = square;
         originalPos = square->pos();
+    }
+    else{
+
     }
 }
 
@@ -74,14 +77,20 @@ void Game::placeShip(Square *squareToReplace){
         //block corner squares
         squareBoard->setListOfBlockedSquares(squareBoard->getSquares().indexOf(squareToReplace));
         qDebug() << squareBoard->listOfBlockedSquares;
+
         //replace
         squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace)) = squareToPlace;
+        qDebug() << "index square to place" << squareBoard->squares.indexOf(squareToPlace);
+        squareBoard->checkNearby(squareBoard->getSquares().indexOf(squareToPlace));
         qDebug() << "index square to replace" << squareBoard->squares.indexOf(squareToReplace);
         squareBoard->getSquares().removeAll(squareToReplace);
         scene->removeItem(squareToReplace);
         qDebug() << "stan statek" << squareToPlace->getState();
+        qDebug() << "hp statek" << squareToPlace->getLifeOfShip();
         //squareToPlace->setIsPlaced(true);
         squareToPlace->setIsPlaced(true);
+        list = getStates(squareBoard);
+
 
     }
     else{
@@ -94,15 +103,25 @@ void Game::placeShip(Square *squareToReplace){
 
 void Game::shoot(Square *squareToShoot){
     qDebug() << squareBoard->squares.indexOf(squareToShoot);
+    qDebug() << squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip();
     if (squareBoard->squares.indexOf(squareToShoot) < 100 ){
         return;
     }
-    else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) ){
+    else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) &&
+             squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip() == 1){
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(Qt::red);
         squareToShoot->setBrush(brush);
         }
+    else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) &&
+             squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip() > 1){
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::yellow);
+        squareToShoot->setBrush(brush);
+
+    }
     else{
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
