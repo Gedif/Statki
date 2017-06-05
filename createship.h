@@ -11,7 +11,7 @@ public:
     CreateShip();
 
     // getters/setters
-    QList<Square*> getSquares();
+    QList<Square*> getShips();
     int getNumOfSegments();
     void setNumOfSegments(int num);
 
@@ -19,7 +19,7 @@ public:
     void placeSquares(int x, int y, int numOfSegments);
 
 private:
-    QList<Square*> squares;
+    QList<Square*> ships;
     int numOfSegments;
 };
 

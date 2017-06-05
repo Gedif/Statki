@@ -82,6 +82,7 @@ void Game::placeShip(Square *squareToReplace){
         qDebug() << "stan statek" << squareToPlace->getState();
         //squareToPlace->setIsPlaced(true);
         squareToPlace->setIsPlaced(true);
+
     }
     else{
 

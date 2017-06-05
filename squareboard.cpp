@@ -4,17 +4,13 @@
 extern Game* game;
 
 SquareBoard::SquareBoard(){
-
 }
 
 QList<Square *> SquareBoard::getSquares(){
     return squares;
 }
 
-
-
 void SquareBoard::placeSquares(int x, int y, int cols, int rows,state state){
-
     int X_SHIFT = 50;
     for (size_t i = 0, n = cols; i < n; i++){
         createSquaresColumn(x+X_SHIFT*i,y,rows,state);
@@ -53,7 +49,6 @@ void SquareBoard::setListOfBlockedSquares(int indexOfShip){
     listOfBlockedSquares.append(indexOfShip-9);
     listOfBlockedSquares.append(indexOfShip+11);
     listOfBlockedSquares.append(indexOfShip+9);
-    // QDebug << listOfBlockedSquares;
 }
 
 void SquareBoard::clearBlockedSquares(int indexOfPickedShip){
@@ -62,3 +57,5 @@ void SquareBoard::clearBlockedSquares(int indexOfPickedShip){
     listOfBlockedSquares.removeOne(indexOfPickedShip+11);
     listOfBlockedSquares.removeOne(indexOfPickedShip+9);
 }
+
+

@@ -26,19 +26,18 @@ public:
 
 
     QList<int> getStates(SquareBoard* board);
-    int indexOfSquare;
     void pickUpShip(Square* square);
     void placeShip(Square *squareToReplace);
-    void shoot(Square* squareToShoot);
-    QString getWhosTurn();
+    void shoot(Square* squareToShoot);   
     void shootAdd(Square* squareToShoot);
     void shootReceived(std::string index);
     void changeTurn();
-    //void removeUsedShip(Square square, int quantity);
     // public attributes
+    int indexOfSquare;
+    bool pickedKlient;
+    QString getWhosTurn();
     QString ipAdress;
     QString port;
-    bool pickedKlient;
     QList<int> list;
     QGraphicsScene* scene;
     SquareBoard* squareBoard;
@@ -47,7 +46,6 @@ public:
     CreateShip* ship3;
     CreateShip* ship4;
     QString whosTurn;
-    //QList<Square*> squares;
     QPointF originalPos;
     Square* squareToPlace = NULL;
 

@@ -24,9 +24,10 @@ public:
 
     //public attributes
 
-     QList<Square*> squares;
-     QList<int> listOfBlockedSquares;
+    QList<Square*> squares;
+    QList<int> listOfBlockedSquares;
 private:
+
     void createSquaresColumn(int x, int y, int numOfRows,state state);
 
 };

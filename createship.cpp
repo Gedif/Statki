@@ -6,8 +6,8 @@ extern Game* game;
 CreateShip::CreateShip(){
 }
 
-QList<Square *> CreateShip::getSquares(){
-    return squares;
+QList<Square *> CreateShip::getShips(){
+    return ships;
 }
 
 void CreateShip::setNumOfSegments(int num){
@@ -24,7 +24,7 @@ void CreateShip::placeSquares(int x, int y, int numOfSegments){
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(Qt::darkGray);
         square->setBrush(brush);
-        squares.append(square);
+        ships.append(square);
         game->scene->addItem(square);
     }
         setNumOfSegments(numOfSegments);

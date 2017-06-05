@@ -23,6 +23,7 @@ public:
     // getters
     int getState();
     bool getIsPlaced();
+    int getLifeOfShip();
 
     //event
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
@@ -32,9 +33,13 @@ public:
     // setters
     void setState(state satateOfSquare);
     void setIsPlaced(bool isIt);
+    void incrementLifeOfShip();
+    //Pubic methods
+    void checkNearby(int index);
 
 
 private:
+    int lifeOfSship_ = 1;
     bool isPlaced;
     QString owner;
     state state_;
