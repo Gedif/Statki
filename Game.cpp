@@ -116,30 +116,38 @@ void Game::shoot(Square *squareToShoot){
 void Game::shootAdd(Square *squareToShoot){
     if(whosTurn == "PLAYER1"){
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
+        temporaryShot = indexOfSquare;
     }
 
 }
 
 void Game::shootReceived(string indexReceived){
 
-    if(whosTurn == "PLAYER2"){
+    if(whosTurn.toStdString() == "PLAYER2"){
         if (list.contains(std::stoi(indexReceived)-100)){
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
             brush.setColor(Qt::red);
-            squareBoard->squares.takeAt(std::stoi(indexReceived))->setBrush(brush);
+            squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
             indexOfSquare = std::stoi(indexReceived);
         }else{
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
             brush.setColor(Qt::green);
-            squareBoard->squares.takeAt(std::stoi(indexReceived))->setBrush(brush);
+            squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
+            indexOfSquare = std::stoi(indexReceived) + OFFSET;
          }
     }else{
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
-        brush.setColor(Qt::red);
-        squareBoard->squares.takeAt(std::stoi(indexReceived))->setBrush(brush);
+        if(std::stoi(indexReceived) == temporaryShot){
+            brush.setColor(Qt::red);
+            squareBoard->squares.operator[](std::stoi(indexReceived))->setBrush(brush);
+        }else{
+            brush.setColor(Qt::green);
+            squareBoard->squares.operator[](std::stoi(indexReceived)-OFFSET)->setBrush(brush);
+        }
+
     }
 }
 

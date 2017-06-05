@@ -33,7 +33,7 @@ public:
     void shootAdd(Square* squareToShoot);
     void shootReceived(std::string index);
     void changeTurn();
-
+    const int OFFSET = 1;
     // public attributes
     int indexOfSquare = 1000;
     int temporaryShot;
