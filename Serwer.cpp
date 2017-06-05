@@ -22,13 +22,13 @@ clientList_ptr clientList(new list<socket_ptr>);
 
 enum sleepLen // Time is in milliseconds
 {
-    sml = 100,
-    lon = 200
+    sml = 50,
+    lon = 50
 };
 
 extern Game* game;
 io_service service2;
-tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),4520));
+tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),4521));
 
 int Serwer:: startSerwer()
 {
@@ -79,7 +79,7 @@ void Serwer::readThread(socket_ptr clientSock)
                     string_ptr inMessage(new string(enemyOutput, bytesRead));
 
                     messageFromKlient = *inMessage;
-                    cout <<"Strzał otrzymany od serwera" + messageFromKlient << endl;
+                    cout <<"Strzał otrzymany od klienta" + messageFromKlient << endl;
                     game->shootReceived(messageFromKlient);
                     messageFromKlient = "default";
                 }

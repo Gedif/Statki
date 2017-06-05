@@ -16,7 +16,13 @@ typedef boost::shared_ptr<string> string_ptr;
 
 extern Game* game;
 io_service service;
-tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 4520);
+tcp::endpoint endpoint(ip::address::from_string("127.0.0.1"), 4521);
+
+enum sleepLen // Time is in milliseconds
+{
+    sml = 50,
+    lon = 50,
+};
 
 int Klient::startKlient()
 {
@@ -64,6 +70,7 @@ void Klient::writeThread(socket_ptr sock)
 
         messageToServer = "default";
         game->indexOfSquare = 1000;
+        boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
 	}
 
 }
@@ -97,8 +104,8 @@ void Klient::readThread(socket_ptr sock)
 
 	for (;;)
 	{
-		if (sock->available())
-		{
+        if (sock->available())
+        {
 			bytesRead = sock->read_some(buffer(enemyOutput, size));
             string_ptr inMessage(new string(enemyOutput, bytesRead));
 			
@@ -107,11 +114,12 @@ void Klient::readThread(socket_ptr sock)
             if(messageFromServer != "default"){
                 cout << "Strzał otrzymany od serwera" + messageFromServer << endl;
                 game->shootReceived(messageFromServer);
+                messageFromServer = "default";
             }
-            messageFromServer = "default";
+
 		}
 
-	
+    boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
 	}
 
 }
