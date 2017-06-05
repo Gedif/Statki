@@ -46,8 +46,16 @@ void Game::pickUpShip(Square* square){
     // squareToPlace->setIsPlaced(true);
     // delete indexs's of blocked squares from list
     squareBoard->clearBlockedSquares(squareBoard->getSquares().indexOf(square));
-    squareBoard->squares.operator [](squareBoard->squares.indexOf(square))= squareToPlace;
-    return;
+    //  create new water square, add it to the list and remove ship from it
+    Square* water = new Square();
+    water->setPos(square->pos());
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(Qt::darkBlue);
+    water->setBrush(brush);
+    scene->addItem(water);
+    squareBoard->squares.operator [](squareBoard->squares.indexOf(square))= water;
+    squareBoard->getSquares().removeAll(square);
     }
     else{
         squareToPlace = square;
@@ -70,8 +78,10 @@ void Game::placeShip(Square *squareToReplace){
         squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace)) = squareToPlace;
         qDebug() << "index square to replace" << squareBoard->squares.indexOf(squareToReplace);
         squareBoard->getSquares().removeAll(squareToReplace);
+        scene->removeItem(squareToReplace);
         qDebug() << "stan statek" << squareToPlace->getState();
         //squareToPlace->setIsPlaced(true);
+        squareToPlace->setIsPlaced(true);
     }
     else{
 
