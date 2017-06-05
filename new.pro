@@ -31,7 +31,8 @@ SOURCES +=\
     CreateShip.cpp \
     Game.cpp \
     Klient.cpp \
-    Serwer.cpp
+    Serwer.cpp \
+    Dialog.cpp
 
 HEADERS  += \
     Square.h \
@@ -39,12 +40,21 @@ HEADERS  += \
     Button.h \
     Game.h \
     CreateShip.h \
-    klient.h
+    Klient.h \
+    serwer.h \
+    Dialog.h
 
-FORMS    +=
+FORMS    += \
+    dialog.ui
 
 
 
 INCLUDEPATH += G:/boost_1_63_0
 DEPENDPATH += G:/boost_1_63_0
 
+
+LIBS += -LG:/boost_1_63_0/stage/lib/ -llibboost_system-vc140-mt-gd-1_63
+
+
+INCLUDEPATH += G:/boost_1_63_0/stage
+DEPENDPATH += G:/boost_1_63_0/stage

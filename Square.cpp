@@ -51,7 +51,7 @@ void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
         //strzelanie
         qDebug() << "szczela";
 
-    game->shoot(this);
+    game->shootAdd(this);
 
     }
 }

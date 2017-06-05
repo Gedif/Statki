@@ -55,12 +55,15 @@ void Klient::writeThread(socket_ptr sock)
 	{
 
         messageToServer = to_string(game->indexOfSquare);
-        cout << messageToServer << endl;
+
         if (messageToServer != "1000" )
 		{
+            cout << "Strzał Klienta" + messageToServer << endl;
             sock->write_some(buffer(messageToServer, size));
 		}
-        messageToServer = "1000";
+
+        messageToServer = "default";
+        game->indexOfSquare = 1000;
 	}
 
 }
@@ -100,9 +103,12 @@ void Klient::readThread(socket_ptr sock)
             string_ptr inMessage(new string(enemyOutput, bytesRead));
 			
             messageFromServer = *inMessage;
-            //if(messageFromServer != 1000){
+
+            if(messageFromServer != "default"){
+                cout << "Strzał otrzymany od serwera" + messageFromServer << endl;
                 game->shootReceived(messageFromServer);
-          //  }
+            }
+            messageFromServer = "default";
 		}
 
 	

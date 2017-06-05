@@ -34,7 +34,7 @@ public:
     void shootReceived(std::string index);
     void changeTurn();
     // public attributes
-    int indexOfSquare;
+    int indexOfSquare = 1000;
     bool pickedKlient;
     QString getWhosTurn();
     QString ipAdress;

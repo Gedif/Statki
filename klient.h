@@ -27,8 +27,8 @@ public:
 
 private:
 
-    string messageFromServer = "1000";
-    string messageToServer = "1000";
+    string messageFromServer = "default";
+    string messageToServer = "default";
 };
 
 

@@ -34,8 +34,8 @@ public:
 
 private:
     int port;
-    string messageFromKlient = "1000";
-    string messageToKlient = "1000";
+    string messageFromKlient = "default";
+    string messageToKlient = "default";
 
 };
 
