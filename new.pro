@@ -40,7 +40,12 @@ HEADERS  += \
     Button.h \
     Game.h \
     CreateShip.h \
+<<<<<<< HEAD
     klient.h \
+=======
+    Klient.h \
+    serwer.h \
+>>>>>>> fc60c2b2cef2f0c9b909c30b611d9b86bbcef3c8
     Dialog.h
 
 FORMS    += \
@@ -51,5 +56,17 @@ DEPENDPATH += F:/boost_1_64_0
 
 LIBS += -LF:/boost_1_64_0/stage/lib/ -llibboost_system-vc140-mt-gd-1_64
 
+<<<<<<< HEAD
 INCLUDEPATH += F:/boost_1_64_0/stage
 DEPENDPATH += F:/boost_1_64_0/stage
+=======
+INCLUDEPATH += G:/boost_1_63_0
+DEPENDPATH += G:/boost_1_63_0
+
+
+LIBS += -LG:/boost_1_63_0/stage/lib/ -llibboost_system-vc140-mt-gd-1_63
+
+
+INCLUDEPATH += G:/boost_1_63_0/stage
+DEPENDPATH += G:/boost_1_63_0/stage
+>>>>>>> fc60c2b2cef2f0c9b909c30b611d9b86bbcef3c8

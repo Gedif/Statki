@@ -79,7 +79,9 @@ void Serwer::readThread(socket_ptr clientSock)
                     string_ptr inMessage(new string(enemyOutput, bytesRead));
 
                     messageFromKlient = *inMessage;
+                    cout <<"Strzał otrzymany od serwera" + messageFromKlient << endl;
                     game->shootReceived(messageFromKlient);
+                    messageFromKlient = "default";
                 }
 
        boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
@@ -99,11 +101,13 @@ void Serwer::writeThread(socket_ptr clientSock)
             messageToKlient = to_string(game->indexOfSquare);
             if (messageToKlient != "1000")
             {
+                cout << "Strzał serwera" + messageToKlient << endl;
                 clientSock->write_some(buffer(messageToKlient, size));
             }
 
 
-        messageToKlient = "1000";
+        messageToKlient = "default";
+        game->indexOfSquare = 1000;
 
         boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
     }
