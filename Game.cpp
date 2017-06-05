@@ -81,10 +81,17 @@ void Game::placeShip(Square *squareToReplace){
         //replace
         squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace)) = squareToPlace;
         qDebug() << "index square to place" << squareBoard->squares.indexOf(squareToPlace);
-        squareBoard->checkNearby(squareBoard->getSquares().indexOf(squareToPlace));
+        for (int i = 0; i < squareToPlace->getLifeOfShip(); ++i){
+
+        squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToPlace)+i*10) = squareToPlace;
+        qDebug() << "index square to place" << squareBoard->squares.indexOf(squareToPlace);
+        //squareBoard->checkNearby(squareBoard->getSquares().indexOf(squareToPlace));
         qDebug() << "index square to replace" << squareBoard->squares.indexOf(squareToReplace);
+
+        }
         squareBoard->getSquares().removeAll(squareToReplace);
         scene->removeItem(squareToReplace);
+
         qDebug() << "stan statek" << squareToPlace->getState();
         qDebug() << "hp statek" << squareToPlace->getLifeOfShip();
         //squareToPlace->setIsPlaced(true);
