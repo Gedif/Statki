@@ -33,7 +33,6 @@ public:
     void shootAdd(Square* squareToShoot);
     void shootReceived(std::string index);
     void changeTurn();
-    void clear();
     // public attributes
     int indexOfSquare = 1000;
     bool pickedKlient;

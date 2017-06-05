@@ -64,6 +64,9 @@ void SquareBoard::setListOfBlockedSquares(int indexOfShip, int numOfSegments){
 }
 
 void SquareBoard::clearBlockedSquares(int indexOfPickedShip){
+    if (indexOfPickedShip == -2)
+        listOfBlockedSquares.clear();
+    else{
     if (indexOfPickedShip%10 == 0){
         listOfBlockedSquares.removeOne(indexOfPickedShip-9);
         listOfBlockedSquares.removeOne(indexOfPickedShip+11);
@@ -77,6 +80,7 @@ void SquareBoard::clearBlockedSquares(int indexOfPickedShip){
         listOfBlockedSquares.removeOne(indexOfPickedShip-9);
         listOfBlockedSquares.removeOne(indexOfPickedShip+11);
         listOfBlockedSquares.removeOne(indexOfPickedShip+9);
+    }
     }
 }
 

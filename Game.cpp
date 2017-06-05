@@ -156,9 +156,7 @@ void Game::changeTurn(){
     }
 }
 
-void Game::clear(){
 
-}
 
 void Game::start(){
 
@@ -170,6 +168,7 @@ void Game::start(){
 
     squareBoard = new SquareBoard();
     squareBoard->placeSquares(10,10,10,10);
+    squareBoard->clearBlockedSquares(-2);
 
     ship1 = new CreateShip();
     ship1->placeSquares(600,20,1);
@@ -180,12 +179,12 @@ void Game::start(){
     ship4 = new CreateShip();
     ship4->placeSquares(600,20+50*6,4);
 
-    // create the back button
-    Button* clearButton = new Button(QString("Clear"));
+    // create the clear button
+    Button* clearButton = new Button(QString("Clear Setup"));
     int bxPos = this->width()/2 - clearButton->boundingRect().width()/2;
     int byPos = 600;
     clearButton->setPos(bxPos,byPos);
-    connect(clearButton,SIGNAL(clicked()),this,SLOT(clear));
+    connect(clearButton,SIGNAL(clicked()),this,SLOT(start()));
     scene->addItem(clearButton);
 
     // create the done placing ships button
