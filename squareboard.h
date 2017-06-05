@@ -5,7 +5,17 @@
 #include <QList>
 #include "Square.h"
 #include "QBrush"
-
+/**
+ * @brief The SquareBoard class.
+ *
+ * @note to  jest notka
+ *
+ * @param x
+ *
+ * @return
+ *
+ * @author Mateusz
+ */
 class SquareBoard{
 public:
     // constructors
@@ -13,7 +23,7 @@ public:
 
     // getters/setters
     QList<Square*> getSquares();
-    QList<int> getListOfBlockedSquares();
+    QList<int> getListOfBlockedSquares(); ///<fhf
     void setListOfBlockedSquares(int indexOfShip);
     void clearBlockedSquares(int indexOfPickedShip);
 
