@@ -4,7 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QList>
-
+#include "QBrush"
 
 enum state
 {
@@ -34,13 +34,14 @@ public:
     void setState(state satateOfSquare);
     void setIsPlaced(bool isIt);
     void setLifeOfShip(int health_points);
+
     //Pubic methods
 
 
 
 private:
-    int lifeOfSship_ = 1;
-    bool isPlaced;
+    int lifeOfSship_ = 0;
+    bool isPlaced = false;
     QString owner;
     state state_;
 

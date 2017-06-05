@@ -24,12 +24,12 @@ public:
     // getters/setters
     QList<Square*> getSquares();
     QList<int> getListOfBlockedSquares(); ///<fhf
-    void setListOfBlockedSquares(int indexOfShip);
+    void setListOfBlockedSquares(int indexOfShip, int numOfSegments);
     void clearBlockedSquares(int indexOfPickedShip);
 
     // public methods
 
-    void placeSquares(int x, int y, int cols, int rows,state state);
+    void placeSquares(int x, int y, int cols, int rows);
     //void checkNearby();
     void checkNearby(int index);
 
@@ -42,7 +42,7 @@ public:
     QList<int> ship3;
     QList<int> ship4;
 private:
-    void createSquaresColumn(int x, int y, int numOfRows,state state);
+    void createSquaresColumn(int x, int y, int numOfRows);
 
 };
 

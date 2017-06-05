@@ -40,30 +40,8 @@ void Game::mousePressEvent(QMouseEvent *event){
 
 void Game::pickUpShip(Square* square){
     //pick up specified ship
-    if (squareToPlace == NULL && square->getIsPlaced() == true){
-    squareToPlace = square;
-    originalPos = square->pos();
-    // squareToPlace->setIsPlaced(true);
-    // delete indexs's of blocked squares from list
-    squareBoard->clearBlockedSquares(squareBoard->getSquares().indexOf(square));
-    //  create new water square, add it to the list and remove ship from it
-    Square* water = new Square();
-    water->setPos(square->pos());
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::darkBlue);
-    water->setBrush(brush);
-    scene->addItem(water);
-    squareBoard->squares.operator [](squareBoard->squares.indexOf(square))= water;
-    squareBoard->getSquares().removeAll(square);
-    }
-    else if (squareToPlace == NULL){
         squareToPlace = square;
         originalPos = square->pos();
-    }
-    else{
-
-    }
 }
 
 void Game::placeShip(Square *squareToReplace){
@@ -75,28 +53,26 @@ void Game::placeShip(Square *squareToReplace){
     if (squareBoard->listOfBlockedSquares.indexOf(squareBoard->getSquares().indexOf(squareToReplace))== -1 || squareBoard->listOfBlockedSquares.isEmpty() ){
         squareToPlace->setPos(squareToReplace->pos());
         //block corner squares
-        squareBoard->setListOfBlockedSquares(squareBoard->getSquares().indexOf(squareToReplace));
+        squareBoard->setListOfBlockedSquares(squareBoard->getSquares().indexOf(squareToReplace),squareToPlace->getLifeOfShip());
         qDebug() << squareBoard->listOfBlockedSquares;
 
         //replace
         squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace)) = squareToPlace;
         qDebug() << "index square to place" << squareBoard->squares.indexOf(squareToPlace);
         for (int i = 0; i < squareToPlace->getLifeOfShip(); ++i){
-
         squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToPlace)+i*10) = squareToPlace;
         qDebug() << "index square to place" << squareBoard->squares.indexOf(squareToPlace);
         //squareBoard->checkNearby(squareBoard->getSquares().indexOf(squareToPlace));
         qDebug() << "index square to replace" << squareBoard->squares.indexOf(squareToReplace);
-
         }
-        squareBoard->getSquares().removeAll(squareToReplace);
-        scene->removeItem(squareToReplace);
+        //squareBoard->getSquares().removeAll(squareToReplace);
+        //scene->removeItem(squareToReplace);
 
         qDebug() << "stan statek" << squareToPlace->getState();
         qDebug() << "hp statek" << squareToPlace->getLifeOfShip();
         //squareToPlace->setIsPlaced(true);
         squareToPlace->setIsPlaced(true);
-        list = getStates(squareBoard);
+        //list = getStates(squareBoard);
 
 
     }
@@ -180,6 +156,10 @@ void Game::changeTurn(){
     }
 }
 
+void Game::clear(){
+
+}
+
 void Game::start(){
 
     // clear the screen
@@ -189,7 +169,7 @@ void Game::start(){
     // test code TODO remove
 
     squareBoard = new SquareBoard();
-    squareBoard->placeSquares(10,10,10,10,unknown);
+    squareBoard->placeSquares(10,10,10,10);
 
     ship1 = new CreateShip();
     ship1->placeSquares(600,20,1);
@@ -201,12 +181,12 @@ void Game::start(){
     ship4->placeSquares(600,20+50*6,4);
 
     // create the back button
-    Button* backButton = new Button(QString("Back"));
-    int bxPos = this->width()/2 - backButton->boundingRect().width()/2;
+    Button* clearButton = new Button(QString("Clear"));
+    int bxPos = this->width()/2 - clearButton->boundingRect().width()/2;
     int byPos = 600;
-    backButton->setPos(bxPos,byPos);
-    connect(backButton,SIGNAL(clicked()),this,SLOT(displayLoggWindow()));
-    scene->addItem(backButton);
+    clearButton->setPos(bxPos,byPos);
+    connect(clearButton,SIGNAL(clicked()),this,SLOT(clear));
+    scene->addItem(clearButton);
 
     // create the done placing ships button
     Button* doneButton = new Button(QString("Done"));
@@ -287,7 +267,7 @@ void Game::displayGameWindow(){
     }else{
         whosTurn = "PLAYER1";
      }
-    squareBoard->placeSquares(520,10,10,10,unknown);
+    squareBoard->placeSquares(520,10,10,10);
 
 }
 
