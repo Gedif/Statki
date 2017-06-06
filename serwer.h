@@ -1,7 +1,8 @@
-
 #ifndef SERWER_H
 #define SERWER_H
 
+#include<iostream>
+#include<cstdlib>
 #include<boost/asio.hpp>
 #include<boost/thread.hpp>
 #include<boost/asio/ip/tcp.hpp>
@@ -12,6 +13,7 @@ using namespace boost::asio;
 using namespace boost::asio::ip;
 
 typedef boost::shared_ptr<tcp::socket> socket_ptr;
+typedef boost::shared_ptr<string> string_ptr;
 
 
 class Serwer{

@@ -1,5 +1,5 @@
-#include "CreateShip.h"
-#include "Game.h"
+#include "create_ship.h"
+#include "game.h"
 
 extern Game* game;
 

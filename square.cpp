@@ -1,5 +1,5 @@
-#include "Square.h"
-#include "Game.h"
+#include "square.h"
+#include "game.h"
 
 extern Game* game;
 

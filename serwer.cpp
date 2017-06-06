@@ -1,34 +1,14 @@
-
-#include<iostream>
-#include<list>
-#include<map>
-#include<queue>
-#include<cstdlib>
-
-#include<boost/asio.hpp>
-#include<boost/thread.hpp>
-#include<boost/asio/ip/tcp.hpp>
 #include "Serwer.h"
-#include "Klient.h"
-#include "Game.h"
+#include "klient.h"
+#include "game.h"
+#define SHORT_TIME 50
+#define LONG_TIME 70
 
 typedef boost::shared_ptr<string> string_ptr;
-typedef map<socket_ptr, string_ptr> clientMap;
-typedef boost::shared_ptr<clientMap> clientMap_ptr;
-typedef boost::shared_ptr< list<socket_ptr> > clientList_ptr;
-
-
-clientList_ptr clientList(new list<socket_ptr>);
-
-enum sleepLen // Time is in milliseconds
-{
-    sml = 50,
-    lon = 50
-};
 
 extern Game* game;
 io_service service2;
-tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),4521));
+tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),5000));
 
 int Serwer:: startSerwer()
 {
@@ -50,10 +30,10 @@ int Serwer:: startSerwer()
 
 
    threads.create_thread(boost::bind(&Serwer::readThread,this,boost::ref(clientSock)));
-    boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
+    boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
     cout << "4" << endl;
    threads.create_thread(boost::bind(&Serwer::writeThread,this,boost::ref(clientSock)));
-    boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::sml));
+    boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
     cout << "3" << endl;
     //threads.join_all();
 
@@ -95,7 +75,7 @@ void Serwer::readThread(socket_ptr clientSock)
                     }
                 }
 
-       boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
+       boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
     }
 }
 
@@ -123,7 +103,7 @@ void Serwer::writeThread(socket_ptr clientSock)
         messageToKlient = "default";
         game->indexOfSquare = 1000;
 
-        boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
+        boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
     }
 
 }

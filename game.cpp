@@ -1,11 +1,11 @@
-#include "Game.h"
-#include "Button.h"
-#include "squareboard.h"
-#include "Dialog.h"
+#include "game.h"
+#include "button.h"
+#include "square_board.h"
+#include "dialog.h"
 #include <QGraphicsTextItem>
 #include <QDebug>
 
-#include "Klient.h"
+#include "klient.h"
 #include "Serwer.h"
 
 Game::Game(QWidget *parent){
@@ -228,14 +228,6 @@ void Game::startGame(){
     isKlientReady = false;
     isServerReady = false;
     displayGameWindow();
-}
-
-int Game::getPort() const{
-    return port;
-}
-
-void Game::setPort(int value){
-    port = value;
 }
 
 void Game::RulesWindow(){

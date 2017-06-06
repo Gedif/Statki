@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "button.h"
 #include <QGraphicsSceneMouseEvent>
 
 Button::Button(QString name, QGraphicsItem *parent): QGraphicsRectItem(parent){

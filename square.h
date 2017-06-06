@@ -11,8 +11,8 @@
 
 enum state
 {
-    UNKNOWN,    //
-    SHIP   //
+    UNKNOWN,
+    SHIP
 };
 
 class Square: public QGraphicsRectItem{

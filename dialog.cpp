@@ -1,6 +1,6 @@
-#include "Dialog.h"
+#include "dialog.h"
 #include "ui_Dialog.h"
-#include "Game.h"
+#include "game.h"
 
 extern Game* game;
 

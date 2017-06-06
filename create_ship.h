@@ -2,7 +2,7 @@
 #define CREATESHIP_H
 
 #include <QList>
-#include "Square.h"
+#include "square.h"
 #include "QBrush"
 
 class CreateShip: public Square{
