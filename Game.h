@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-#include "Button.h"
+#include "button.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMouseEvent>
@@ -10,13 +10,12 @@
 #include <QString>
 #include <QDebug>
 #include <QGraphicsTextItem>
-#include "squareboard.h"
-#include "Square.h"
-#include "CreateShip.h"
-#include "Button.h"
-#include "squareboard.h"
-#include "Dialog.h"
-#include "Klient.h"
+#include "square_board.h"
+#include "square.h"
+#include "create_ship.h"
+#include "button.h"
+#include "dialog.h"
+#include "klient.h"
 #include "Serwer.h"
 
 class Game: public QGraphicsView{
@@ -62,7 +61,7 @@ public:
     Square* squareToPlace = NULL;
     Button* doneButton;
 
-    int getPort() const;
+    int getPort();
     void setPort(int value);
 
 public slots:
