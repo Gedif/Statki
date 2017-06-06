@@ -14,21 +14,12 @@ Dialog::~Dialog(){
     delete ui;
 }
 
-QString Dialog::getIpAdress(){
-    return ipAdress;
-}
-
-QString Dialog::getPort(){
-    return port;
-}
 
 bool Dialog::getPickedKlient(){
     return pickedKlient;
 }
 
 void Dialog::on_pushButton_clicked(){
-    ipAdress = ui->lineEdit->text();
-    port = ui->lineEdit_2->text();
     if (ui->radioButton->isChecked()){
         pickedKlient = true;
     }

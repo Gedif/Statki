@@ -15,8 +15,6 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = 0);
     ~Dialog();
-    QString getIpAdress();
-    QString getPort();
     bool getPickedKlient();
 
 private slots:
@@ -25,8 +23,6 @@ private slots:
 
 private:
     bool pickedKlient;
-    QString ipAdress;
-    QString port;
     Ui::Dialog *ui;
 };
 

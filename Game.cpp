@@ -369,11 +369,9 @@ void Game::displayLoggWindow(){
 
     pickedKlient = MyDialog.getPickedKlient();
     if(pickedKlient == 0){
-        setPort(MyDialog.getPort().toInt());
         Klient* client = new Klient();
         boost::thread t2{&Klient::startKlient,client};
     }else{
-         setPort(MyDialog.getPort().toInt());
          Serwer* host = new Serwer();
          boost::thread t2{&Serwer::startSerwer,host};
 
