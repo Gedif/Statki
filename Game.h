@@ -37,12 +37,14 @@ public:
     // public attributes
     int indexOfSquare = 1000;
     int temporaryShot;
+    int counter = 1;
     bool pickedKlient;
     bool isReady;
     QString getWhosTurn();
     QString ipAdress;
     QString port;
     QList<int> list;
+    QList<int> listOfShootedInedxes;
     QGraphicsScene* scene;
     SquareBoard* squareBoard;
     CreateShip* ship1;
@@ -56,6 +58,7 @@ public:
 
 public slots:
     void start();
+    void endScreen();
     void RulesWindow();
     void displayMainMenu();
     void displayGameWindow();

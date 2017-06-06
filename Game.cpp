@@ -134,31 +134,31 @@ void Game::shootReceived(string indexReceived){
 
     if(whosTurn.toStdString() == "PLAYER2"){
         if (list.contains(std::stoi(indexReceived)-100) &&
-                (counter == squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip())){
+           (1 == squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip())){
                 QBrush brush;
                 brush.setStyle(Qt::SolidPattern);
                 brush.setColor(Qt::red);
-                Square* squareShooted = new Square();
-                squareShooted->setPos(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->pos());
-                squareShooted->setBrush(brush);
+                squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
                 indexOfSquare = std::stoi(indexReceived);
-                scene->addItem(squareShooted);
-                counter = 1;
+
                 }
             else if (list.contains(std::stoi(indexReceived)-100) &&
-                     squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip() > 1 &&
-                     (counter < squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip())){
+                     squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip() > 1){
                 QBrush brush;
                 brush.setStyle(Qt::SolidPattern);
+                if(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip() == 4){
+                brush.setColor(Qt::darkYellow);
+                }
+                else if(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip() == 3){
                 brush.setColor(Qt::yellow);
-                Square* squareShooted = new Square();
-                squareShooted->setX(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->x()+50*counter);
-                squareShooted->setY(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->y());
-                squareShooted->setBrush(brush);
+                }
+                else if(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip() == 2){
+                brush.setColor(Qt::darkRed);
+                }
+                squareBoard->squares.operator [](std::stoi(indexReceived)-100)->
+                        setLifeOfShip(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
+                squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
                 indexOfSquare = std::stoi(indexReceived);
-                //scene->addItem(squareShooted);
-                counter++;
-
             }
             else{
             QBrush brush;
@@ -167,12 +167,15 @@ void Game::shootReceived(string indexReceived){
             squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
             indexOfSquare = std::stoi(indexReceived) + OFFSET;
          }
-    }else{
+    }else
+    {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         if(std::stoi(indexReceived) == temporaryShot){
+            listOfShootedInedxes.append(std::stoi(indexReceived));
             brush.setColor(Qt::red);
             squareBoard->squares.operator[](std::stoi(indexReceived))->setBrush(brush);
+
             //changeTurn();
         }else{
             brush.setColor(Qt::green);
@@ -181,6 +184,11 @@ void Game::shootReceived(string indexReceived){
         }
 
     }
+    if(listOfShootedInedxes.size() == list.size()){
+       // GameOVER;
+        displayMainMenu();
+    }
+
 }
 
 QString Game::getWhosTurn(){
@@ -235,6 +243,23 @@ void Game::start(){
 
     scene->addItem(doneButton);
 
+}
+
+void Game::endScreen(){
+    scene->clear();
+    QGraphicsRectItem* endScreenWindow = new QGraphicsRectItem;
+    endScreenWindow->setRect(100,100,800,500);
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(Qt::darkCyan);
+    endScreenWindow->setBrush(brush);
+
+    QGraphicsTextItem* text = new QGraphicsTextItem("Game Over",endScreenWindow);
+    int xPos = rect().width()/2 - 10*text->boundingRect().width()/2;
+    int yPos = rect().height()/2 - 10*text->boundingRect().height()/2;
+    text->setPos(xPos,yPos);
+    text->setScale(10);
+    scene->addItem(endScreenWindow);
 }
 
 void Game::startGame(){
