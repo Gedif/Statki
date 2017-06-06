@@ -133,16 +133,34 @@ void Game::shootAdd(Square *squareToShoot){
 void Game::shootReceived(string indexReceived){
 
     if(whosTurn.toStdString() == "PLAYER2"){
-        if (list.contains(std::stoi(indexReceived)-100)){
-            QBrush brush;
-            brush.setStyle(Qt::SolidPattern);
-            brush.setColor(Qt::red);
-            Square* squareShooted = new Square();
-            squareShooted->setPos(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->pos());
-            squareShooted->setBrush(brush);
-            indexOfSquare = std::stoi(indexReceived);
+        if (list.contains(std::stoi(indexReceived)-100) &&
+                (counter == squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip())){
+                QBrush brush;
+                brush.setStyle(Qt::SolidPattern);
+                brush.setColor(Qt::red);
+                Square* squareShooted = new Square();
+                squareShooted->setPos(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->pos());
+                squareShooted->setBrush(brush);
+                indexOfSquare = std::stoi(indexReceived);
+                scene->addItem(squareShooted);
+                counter = 1;
+                }
+            else if (list.contains(std::stoi(indexReceived)-100) &&
+                     squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip() > 1 &&
+                     (counter < squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip())){
+                QBrush brush;
+                brush.setStyle(Qt::SolidPattern);
+                brush.setColor(Qt::yellow);
+                Square* squareShooted = new Square();
+                squareShooted->setX(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->x()+50*counter);
+                squareShooted->setY(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->y());
+                squareShooted->setBrush(brush);
+                indexOfSquare = std::stoi(indexReceived);
+                //scene->addItem(squareShooted);
+                counter++;
 
-        }else{
+            }
+            else{
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
             brush.setColor(Qt::green);
