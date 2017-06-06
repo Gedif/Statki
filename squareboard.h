@@ -5,6 +5,7 @@
 #include <QList>
 #include "Square.h"
 #include "QBrush"
+
 /**
  * @brief The SquareBoard class.
  *

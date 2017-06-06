@@ -20,7 +20,7 @@ void CreateShip::placeSquares(int x, int y, int num_of_segment, int numOfShips){
     for(int i=0 ; i < numOfShips; ++i){
         Square* square = new Square();
         square->setLifeOfShip(num_of_segment);
-        square->setState(ship);
+        square->setState(SHIP);
 
         square->setRect(5,5,50*num_of_segment,50);
         square->setPos(x,y);

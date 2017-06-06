@@ -26,7 +26,7 @@ void SquareBoard::createSquaresColumn(int x, int y, int numOfRows){
         Square* square = new Square();
         square->setPos(x,y+50*i);
         //square->setIsPlaced(true);
-        square->setState(unknown);
+        square->setState(UNKNOWN);
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
             brush.setColor(Qt::darkBlue);

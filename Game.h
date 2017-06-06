@@ -5,13 +5,19 @@
 #include <QGraphicsScene>
 #include <QMouseEvent>
 #include <string>
-#include "squareboard.h"
-#include "Square.h"
-#include "CreateShip.h"
 #include <QTextEdit>
 #include <QDialog>
 #include <QString>
 #include <QDebug>
+#include <QGraphicsTextItem>
+#include "squareboard.h"
+#include "Square.h"
+#include "CreateShip.h"
+#include "Button.h"
+#include "squareboard.h"
+#include "Dialog.h"
+#include "Klient.h"
+#include "Serwer.h"
 
 class Game: public QGraphicsView{
     Q_OBJECT

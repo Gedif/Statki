@@ -1,6 +1,5 @@
 #include "Button.h"
-#include <QGraphicsTextItem>
-#include <QBrush>
+
 
 Button::Button(QString name, QGraphicsItem *parent): QGraphicsRectItem(parent){
     // draw the rect

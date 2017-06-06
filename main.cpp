@@ -1,7 +1,5 @@
 #include <QApplication>
 #include "Game.h"
-#include "Klient.h"
-#include "Serwer.h"
 
 Game* game;
 int main(int argc, char *argv[])

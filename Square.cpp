@@ -1,8 +1,5 @@
 #include "Square.h"
-#include <QRectF>
-#include <QVector>
 #include "Game.h"
-#include <QDebug>
 
 extern Game* game;
 
@@ -10,7 +7,7 @@ Square::Square(QGraphicsItem *parent){
     // draw the square
 
     setRect(5,5,50,50);
-    setState(unknown);
+    setState(UNKNOWN);
     // allow responding to hover events
     setAcceptHoverEvents(true);
 //    isPlaced = false;
@@ -35,12 +32,12 @@ void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
     qDebug() << getState();
     if(game->whosTurn == "NOONE"){
         //układanie statkow
-        if (getState() == ship && isPlaced==false){
+        if (getState() == SHIP && isPlaced==false){
 
             qDebug() << "jesli to statek podnies"  << getState();
             game->pickUpShip(this);
         }
-        else if (getState() == unknown && game->squareToPlace != NULL ) {
+        else if (getState() == UNKNOWN && game->squareToPlace != NULL ) {
             qDebug() << "jesli to woda, masz co położyć";
             game->placeShip(this);
         }

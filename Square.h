@@ -5,14 +5,15 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QList>
 #include "QBrush"
+#include <QRectF>
+#include <QVector>
+#include <QDebug>
+
 
 enum state
 {
-    unknown,    //
-    miss,       //
-    hit,        //
-  //  sinked,
-    ship   //
+    UNKNOWN,    //
+    SHIP   //
 };
 
 
