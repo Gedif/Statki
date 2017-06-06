@@ -186,8 +186,9 @@ void Game::shootReceived(string indexReceived){
 
     }
     if(listOfShootedInedxes.size() == list.size()){
-       // GameOVER;
-        displayMainMenu();
+       // endScreen();
+        close();
+
     }
 
 }
@@ -215,7 +216,7 @@ void Game::start(){
 
     squareBoard = new SquareBoard();
     squareBoard->placeSquares(10,10,10,10);
-    squareBoard->clearBlockedSquares(-2);
+    squareBoard->clearBlockedSquares();
 
     ship1 = new CreateShip();
     ship1->placeSquares(600,20,1,4);
@@ -263,6 +264,7 @@ void Game::endScreen(){
     text->setScale(10);
     scene->addItem(endScreenWindow);
 }
+
 
 void Game::readyGame(){
 
