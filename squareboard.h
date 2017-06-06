@@ -24,8 +24,8 @@ public:
     // getters/setters
     QList<Square*> getSquares();
     QList<int> getListOfBlockedSquares(); ///<fhf
-    void setListOfBlockedSquares(int indexOfShip, int numOfSegments);
-    void clearBlockedSquares(int indexOfPickedShip);
+    void setListOfBlockedSquares(int index, int numOfSegments);
+    void clearBlockedSquares();
 
     // public methods
 

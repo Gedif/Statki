@@ -37,8 +37,9 @@ void SquareBoard::createSquaresColumn(int x, int y, int numOfRows){
     }
 }
 
-void SquareBoard::setListOfBlockedSquares(int indexOfShip, int numOfSegments){
-    for (int i = 1; i <= numOfSegments; ++i){
+void SquareBoard::setListOfBlockedSquares(int index, int numOfSegments){
+    for (int i = 0; i < numOfSegments; ++i){
+        int indexOfShip = index+10*i;
     if (indexOfShip%10 == 0){
         listOfBlockedSquares.append(indexOfShip-9);
         listOfBlockedSquares.append(indexOfShip-10);
@@ -63,24 +64,7 @@ void SquareBoard::setListOfBlockedSquares(int indexOfShip, int numOfSegments){
     }
 }
 
-void SquareBoard::clearBlockedSquares(int indexOfPickedShip){
-    if (indexOfPickedShip == -2)
+void SquareBoard::clearBlockedSquares(){
         listOfBlockedSquares.clear();
-    else{
-    if (indexOfPickedShip%10 == 0){
-        listOfBlockedSquares.removeOne(indexOfPickedShip-9);
-        listOfBlockedSquares.removeOne(indexOfPickedShip+11);
-    }
-    else if (indexOfPickedShip%10 == 9){
-        listOfBlockedSquares.removeOne(indexOfPickedShip-11);
-        listOfBlockedSquares.removeOne(indexOfPickedShip+9);
-    }
-    else {
-        listOfBlockedSquares.removeOne(indexOfPickedShip-11);
-        listOfBlockedSquares.removeOne(indexOfPickedShip-9);
-        listOfBlockedSquares.removeOne(indexOfPickedShip+11);
-        listOfBlockedSquares.removeOne(indexOfPickedShip+9);
-    }
-    }
 }
 
