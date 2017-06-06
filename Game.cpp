@@ -117,7 +117,9 @@ void Game::shoot(Square *squareToShoot){
 
 void Game::shootAdd(Square *squareToShoot){
     if(whosTurn == "PLAYER1"){
+
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
+        cout << indexOfSquare << endl;
         temporaryShot = indexOfSquare;
     }
 
@@ -148,9 +150,11 @@ void Game::shootReceived(string indexReceived){
         if(std::stoi(indexReceived) == temporaryShot){
             brush.setColor(Qt::red);
             squareBoard->squares.operator[](std::stoi(indexReceived))->setBrush(brush);
+            changeTurn();
         }else{
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](std::stoi(indexReceived)-OFFSET)->setBrush(brush);
+            changeTurn();
         }
 
     }
@@ -173,11 +177,9 @@ void Game::changeTurn(){
 
 void Game::start(){
 
-    // clear the screen
+
     scene->clear();
     whosTurn = "NOONE";
-        qDebug() << "dupa";
-    // test code TODO remove
 
     squareBoard = new SquareBoard();
     squareBoard->placeSquares(10,10,10,10);
@@ -214,7 +216,11 @@ void Game::start(){
 
 void Game::startGame(){
     isReady = true;
+    if(pickedKlient  == 0){
     whosTurn = "PLAYER2";
+    }else{
+     whosTurn = "PLAYER1";
+    }
     displayGameWindow();
 }
 
