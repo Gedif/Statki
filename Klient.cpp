@@ -2,7 +2,7 @@
 #include<queue>
 #include<string>
 #include<cstdlib>
-
+#include <chrono>
 #include<boost/thread.hpp>
 #include<boost/bind.hpp>
 #include<boost/asio.hpp>
@@ -12,7 +12,7 @@
 #include "Game.h"
 
 typedef boost::shared_ptr<string> string_ptr;
-
+typedef std::chrono::high_resolution_clock Clock;
 
 extern Game* game;
 io_service service;
@@ -56,11 +56,16 @@ int Klient::startKlient()
 void Klient::writeThread(socket_ptr sock)
 {
 	int size = 32;
-
 	for (;;)
 	{
 
+
+        if(game->isReady == true){
+            messageToServer = "START";
+            game->isReady = false;
+        }else{
         messageToServer = to_string(game->indexOfSquare);
+        }
 
         if (messageToServer != "1000" )
 		{

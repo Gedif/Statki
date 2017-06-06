@@ -4,8 +4,10 @@
 #include "Dialog.h"
 #include <QGraphicsTextItem>
 #include <QDebug>
+
 #include "Klient.h"
 #include "Serwer.h"
+
 
 
 Game::Game(QWidget *parent){
@@ -199,13 +201,21 @@ void Game::start(){
     scene->addItem(clearButton);
 
     // create the done placing ships button
-    Button* doneButton = new Button(QString("Done"));
+    doneButton = new Button(QString("Done"));
     int dxPos = this->width()/2 - doneButton->boundingRect().width()/2 + 250;
     int dyPos = 600;
     doneButton->setPos(dxPos,dyPos);
-    connect(doneButton,SIGNAL(clicked()),this,SLOT(displayGameWindow()));
+
+    connect(doneButton,SIGNAL(clicked()),this,SLOT(startGame()));
+
     scene->addItem(doneButton);
 
+}
+
+void Game::startGame(){
+    isReady = true;
+    whosTurn = "PLAYER2";
+    displayGameWindow();
 }
 
 void Game::RulesWindow(){
@@ -272,11 +282,6 @@ void Game::displayGameWindow(){
 
     //squareBoard->checkNearby();
 
-    if(pickedKlient == 0){
-       whosTurn = "PLAYER2";
-    }else{
-        whosTurn = "PLAYER1";
-     }
     squareBoard->placeSquares(520,10,10,10);
 
 }
@@ -313,3 +318,5 @@ QList<int> Game::getStates(SquareBoard* board){
          }
     return list;
 }
+
+

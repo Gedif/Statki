@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-
+#include "Button.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMouseEvent>
@@ -38,6 +38,7 @@ public:
     int indexOfSquare = 1000;
     int temporaryShot;
     bool pickedKlient;
+    bool isReady;
     QString getWhosTurn();
     QString ipAdress;
     QString port;
@@ -51,7 +52,7 @@ public:
     QString whosTurn;
     QPointF originalPos;
     Square* squareToPlace = NULL;
-
+    Button* doneButton;
 
 public slots:
     void start();
@@ -59,6 +60,7 @@ public slots:
     void displayMainMenu();
     void displayGameWindow();
     void displayLoggWindow();
+    void startGame();
 private:
 };
 

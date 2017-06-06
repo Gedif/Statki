@@ -79,9 +79,13 @@ void Serwer::readThread(socket_ptr clientSock)
                     string_ptr inMessage(new string(enemyOutput, bytesRead));
 
                     messageFromKlient = *inMessage;
-                    cout <<"Strzał otrzymany od klienta" + messageFromKlient << endl;
-                    game->shootReceived(messageFromKlient);
-                    messageFromKlient = "default";
+                    if(messageFromKlient == "START"){
+                        game->whosTurn = "PLAYER1";
+                        game->doneButton->clicked();
+                    }else{
+                        game->shootReceived(messageFromKlient);
+                        messageFromKlient = "default";
+                    }
                 }
 
        boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
