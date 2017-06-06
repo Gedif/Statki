@@ -93,18 +93,22 @@ void Game::shoot(Square *squareToShoot){
         return;
     }
     else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) &&
-             squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip() == 1){
+
+             (counter == squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip())){
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(Qt::red);
         squareToShoot->setBrush(brush);
+        counter = 1;
         }
     else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) &&
-             squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip() > 1){
+             squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip() > 1 &&
+             (counter < squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip())){
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(Qt::yellow);
         squareToShoot->setBrush(brush);
+        counter++;
 
     }
     else{
@@ -114,6 +118,7 @@ void Game::shoot(Square *squareToShoot){
         squareToShoot->setBrush(brush);
     }
 }
+
 
 void Game::shootAdd(Square *squareToShoot){
     if(whosTurn == "PLAYER1"){
@@ -150,11 +155,11 @@ void Game::shootReceived(string indexReceived){
         if(std::stoi(indexReceived) == temporaryShot){
             brush.setColor(Qt::red);
             squareBoard->squares.operator[](std::stoi(indexReceived))->setBrush(brush);
-            changeTurn();
+            //changeTurn();
         }else{
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](std::stoi(indexReceived)-OFFSET)->setBrush(brush);
-            changeTurn();
+            //changeTurn();
         }
 
     }
