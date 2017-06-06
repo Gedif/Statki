@@ -1,42 +1,36 @@
 #include "Serwer.h"
 #include "klient.h"
 #include "game.h"
+#define PORT 5000
+#define DEFAULT "default"
+#define START "START"
 #define SHORT_TIME 50
 #define LONG_TIME 70
+#define DEFAULT_INDEX "1000"
 
-typedef boost::shared_ptr<string> string_ptr;
 
 extern Game* game;
 io_service service2;
-tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),5000));
+tcp::acceptor acceptor(service2, tcp::endpoint(tcp::v4(),PORT));
 
 int Serwer:: startSerwer()
 {
-
-    cout << "Waiting for clients..." << endl;
-
+    try
+    {
         socket_ptr clientSock(new tcp::socket(service2));
-        cout << "1" << endl;
         acceptor.accept(*clientSock);
-        cout << "New client joined! " << endl;
-        cout << "2" << endl;
 
-
-
-
-
-    boost::thread_group threads;
-    cout << "5" << endl;
-
-
-   threads.create_thread(boost::bind(&Serwer::readThread,this,boost::ref(clientSock)));
-    boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
-    cout << "4" << endl;
-   threads.create_thread(boost::bind(&Serwer::writeThread,this,boost::ref(clientSock)));
-    boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
-    cout << "3" << endl;
-    //threads.join_all();
-
+        boost::thread_group threads;
+        threads.create_thread(boost::bind(&Serwer::readThread,this,boost::ref(clientSock)));
+        boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
+        threads.create_thread(boost::bind(&Serwer::writeThread,this,boost::ref(clientSock)));
+        boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
+        threads.join_all();
+    }
+    catch (std::exception& e)
+    {
+        cerr << e.what() << endl;
+    }
 
     return 0;
 }
@@ -50,32 +44,26 @@ void Serwer::readThread(socket_ptr clientSock)
     char enemyOutput[1024] = { 0 };
     string inMessage;
 
-    for (;;)
-    {
-                if (clientSock->available())
-                {
-                    bytesRead = clientSock->read_some(buffer(enemyOutput, size));
+    for (;;){
+        if (clientSock->available()){
 
-                    string_ptr inMessage(new string(enemyOutput, bytesRead));
-                    cout << "Debuging1" << endl;
-                    messageFromKlient = *inMessage;
-                    if(messageFromKlient == "START"){
-                        cout << "Debuging2" << endl;
-                        game->isKlientReady = true;
-                        cout << "Debuging3" << endl;
-                        if(game->isKlientReady == true && game->isServerReady == true){
-                            cout << "Debuging4" << endl;
-                            game->doneButton->doubleClicked();
-                            messageFromKlient = "default";
-                        }
+            bytesRead = clientSock->read_some(buffer(enemyOutput, size));
+            string_ptr inMessage(new string(enemyOutput, bytesRead));
 
-                    }else{
-                        game->shootReceived(messageFromKlient);
-                        messageFromKlient = "default";
-                    }
+            messageFromKlient = *inMessage;
+            if(messageFromKlient == "START"){
+                game->isKlientReady = true;
+                if(game->isKlientReady == true && game->isServerReady == true){
+                    game->doneButton->doubleClicked();
+                    messageFromKlient = "default";
                 }
+            }else{
+                game->shootReceived(messageFromKlient);
+                messageFromKlient = "default";
+            }
+        }
 
-       boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
+        boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
     }
 }
 
@@ -84,60 +72,28 @@ void Serwer::readThread(socket_ptr clientSock)
 
 void Serwer::writeThread(socket_ptr clientSock)
 {
-    for (;;)
-    {
-        int size = 32;
+    int size = 32;
+    for (;;){
+         if(game->isServerReady == true){
+         messageToKlient = "START";
+         }else{
+            messageToKlient = to_string(game->indexOfSquare);
+         }
 
-            if(game->isServerReady == true){
-                 messageToKlient = "START";
-             }else{
-                 messageToKlient = to_string(game->indexOfSquare);
-             }
-            if (messageToKlient != "1000")
-            {
+         if (messageToKlient != DEFAULT_INDEX){
                 cout << "Strzał serwera" + messageToKlient << endl;
                 clientSock->write_some(buffer(messageToKlient, size));
-            }
+         }
 
 
-        messageToKlient = "default";
-        game->indexOfSquare = 1000;
+        messageToKlient = DEFAULT;
+        game->indexOfSquare = std::stoi(DEFAULT_INDEX);;
 
         boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
     }
 
 }
 
-
-int Serwer::getPort() const
-{
-    return port;
-}
-
-void Serwer::setPort(int value)
-{
-    port = value;
-}
-
-string Serwer::getMessageFromKlient() const
-{
-    return messageFromKlient;
-}
-
-void Serwer::setMessageFromKlient(const string &value)
-{
-    messageFromKlient = value;
-}
-
-string Serwer::getMessageToKlient() const
-{
-    return messageToKlient;
-}
-
-void Serwer::setMessageToKlient(const string &value)
-{
-    messageToKlient = value;
-}
 
 
 

@@ -5,6 +5,7 @@
 #define START "START"
 #define SHORT_TIME 50
 #define LONG_TIME 70
+#define DEFAULT_INDEX "1000"
 
 
 
@@ -41,20 +42,19 @@ void Klient::writeThread(socket_ptr sock)
 	int size = 32;
 	for (;;){
 
-        if(game->isKlientReady == true){          
-            messageToServer = START;
-        }else{            
-            messageToServer = to_string(game->indexOfSquare);
-        }
+            if(game->isKlientReady == true){
+                messageToServer = START;
+            }else{
+                messageToServer = to_string(game->indexOfSquare);
+            }
 
-        if (messageToServer != DEFAULT )
-		{
-            sock->write_some(buffer(messageToServer, size));
-		}
+            if (messageToServer != DEFAULT_INDEX ){
+                    sock->write_some(buffer(messageToServer, size));
+            }
 
-        messageToServer = DEFAULT;
-        game->indexOfSquare = 1000;
-        boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
+            messageToServer = DEFAULT;
+            game->indexOfSquare = std::stoi(DEFAULT_INDEX);
+            boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
 	}
 
 }
@@ -70,7 +70,7 @@ void Klient::readThread(socket_ptr sock)
 
         if (sock->available()){
 
-			bytesRead = sock->read_some(buffer(enemyOutput, size));
+            bytesRead = sock->read_some(buffer(enemyOutput, size));
             string_ptr inMessage(new string(enemyOutput, bytesRead));
             messageFromServer = *inMessage;
 
@@ -82,8 +82,8 @@ void Klient::readThread(socket_ptr sock)
                         messageFromServer = DEFAULT;
                     }
                 }else{
-                game->shootReceived(messageFromServer);
-                messageFromServer = DEFAULT;
+                    game->shootReceived(messageFromServer);
+                    messageFromServer = DEFAULT;
                 }
 
             }

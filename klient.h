@@ -1,5 +1,6 @@
 #ifndef KLIENT_H
 #define KLIENT_H
+#define DEFAULT "default"
 
 #include <iostream>
 #include <queue>
@@ -54,11 +55,11 @@ private:
     /**
      * @brief Wiadomość od serwera
      */
-    string messageFromServer = "default";
+    string messageFromServer = DEFAULT;
     /**
      * @brief Wiadomości przesyłane do serwera.
      */
-    string messageToServer = "default";
+    string messageToServer = DEFAULT;
 };
 
 
