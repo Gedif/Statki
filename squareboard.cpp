@@ -17,21 +17,17 @@ void SquareBoard::placeSquares(int x, int y, int cols, int rows){
     }
 }
 
-
-
 void SquareBoard::createSquaresColumn(int x, int y, int numOfRows){
     // creates a column of Squares at the specified location with the specified
     // number of rows
     for (size_t i = 0, n = numOfRows; i < n; i++){
         Square* square = new Square();
         square->setPos(x,y+50*i);
-        //square->setIsPlaced(true);
         square->setState(UNKNOWN);
-            QBrush brush;
-            brush.setStyle(Qt::SolidPattern);
-            brush.setColor(Qt::darkBlue);
-            square->setBrush(brush);
-
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::darkBlue);
+        square->setBrush(brush);
         squares.append(square);
         game->scene->addItem(square);
     }
@@ -40,31 +36,30 @@ void SquareBoard::createSquaresColumn(int x, int y, int numOfRows){
 void SquareBoard::setListOfBlockedSquares(int index, int numOfSegments){
     for (int i = 0; i < numOfSegments; ++i){
         int indexOfShip = index+10*i;
-    if (indexOfShip%10 == 0){
-        listOfBlockedSquares.append(indexOfShip-9);
-        listOfBlockedSquares.append(indexOfShip-10);
-        listOfBlockedSquares.append(indexOfShip+1);
-        listOfBlockedSquares.append(indexOfShip+10);
-        listOfBlockedSquares.append(indexOfShip+11);
-    }
-    else if (indexOfShip%10 == 9){
-        listOfBlockedSquares.append(indexOfShip-11);
-        listOfBlockedSquares.append(indexOfShip+9);
-    }
-    else {
-        listOfBlockedSquares.append(indexOfShip-1);
-        listOfBlockedSquares.append(indexOfShip-9);
-        listOfBlockedSquares.append(indexOfShip-10);
-        listOfBlockedSquares.append(indexOfShip-11);
-        listOfBlockedSquares.append(indexOfShip+1);
-        listOfBlockedSquares.append(indexOfShip+9);
-        listOfBlockedSquares.append(indexOfShip+10);
-        listOfBlockedSquares.append(indexOfShip+11);
-    }
+        if (indexOfShip%10 == 0){
+            listOfBlockedSquares.append(indexOfShip-9);
+            listOfBlockedSquares.append(indexOfShip-10);
+            listOfBlockedSquares.append(indexOfShip+1);
+            listOfBlockedSquares.append(indexOfShip+10);
+            listOfBlockedSquares.append(indexOfShip+11);
+        }
+        else if (indexOfShip%10 == 9){
+            listOfBlockedSquares.append(indexOfShip-11);
+            listOfBlockedSquares.append(indexOfShip+9);
+        }
+        else {
+            listOfBlockedSquares.append(indexOfShip-1);
+            listOfBlockedSquares.append(indexOfShip-9);
+            listOfBlockedSquares.append(indexOfShip-10);
+            listOfBlockedSquares.append(indexOfShip-11);
+            listOfBlockedSquares.append(indexOfShip+1);
+            listOfBlockedSquares.append(indexOfShip+9);
+            listOfBlockedSquares.append(indexOfShip+10);
+            listOfBlockedSquares.append(indexOfShip+11);
+        }
     }
 }
 
 void SquareBoard::clearBlockedSquares(){
         listOfBlockedSquares.clear();
 }
-

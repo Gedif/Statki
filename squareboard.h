@@ -21,21 +21,16 @@ class SquareBoard{
 public:
     // constructors
     SquareBoard();
-
     // getters/setters
     QList<Square*> getSquares();
     QList<int> getListOfBlockedSquares(); ///<fhf
     void setListOfBlockedSquares(int index, int numOfSegments);
     void clearBlockedSquares();
-
     // public methods
-
     void placeSquares(int x, int y, int cols, int rows);
     //void checkNearby();
     void checkNearby(int index);
-
     //public attributes
-
     QList<Square*> squares;
     QList<int> listOfBlockedSquares;
     QList<int> ship1;
@@ -44,8 +39,6 @@ public:
     QList<int> ship4;
 private:
     void createSquaresColumn(int x, int y, int numOfRows);
-
 };
-
 
 #endif // SQUAREBOARD_H

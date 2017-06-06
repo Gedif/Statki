@@ -14,7 +14,6 @@ Dialog::~Dialog(){
     delete ui;
 }
 
-
 bool Dialog::getPickedKlient(){
     return pickedKlient;
 }

@@ -8,15 +8,10 @@
 #include "Klient.h"
 #include "Serwer.h"
 
-
-
 Game::Game(QWidget *parent){
-    // set up the screen
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1024,768);
-
-    // set up the scene
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1024,768);
     setScene(scene);
@@ -28,8 +23,8 @@ void Game::mouseMoveEvent(QMouseEvent *event){
     }
     QGraphicsView::mouseMoveEvent(event);
 }
+
 void Game::mousePressEvent(QMouseEvent *event){
-    // make right click return squareToPlace to originalPos
     if (event->button() == Qt::RightButton){
         if (squareToPlace){
             squareToPlace->setPos(originalPos);
@@ -41,46 +36,21 @@ void Game::mousePressEvent(QMouseEvent *event){
 }
 
 void Game::pickUpShip(Square* square){
-    //pick up specified ship
         squareToPlace = square;
         originalPos = square->pos();
 }
 
 void Game::placeShip(Square *squareToReplace){
-    //replaces the specified square with the square to place
-    qDebug() << "statek przed" << squareBoard->getSquares().indexOf(squareToPlace);
-
-    qDebug() << "index to replace"<< squareBoard->getSquares().indexOf(squareToReplace);
-    qDebug() << squareBoard->listOfBlockedSquares.isEmpty();
     if (squareBoard->listOfBlockedSquares.indexOf(squareBoard->getSquares().indexOf(squareToReplace))== -1 || squareBoard->listOfBlockedSquares.isEmpty() ){
         squareToPlace->setPos(squareToReplace->pos());
-        //block corner squares
         squareBoard->setListOfBlockedSquares(squareBoard->getSquares().indexOf(squareToReplace),squareToPlace->getLifeOfShip());
-        qDebug() << squareBoard->listOfBlockedSquares;
-
-        //replace
         squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToReplace)) = squareToPlace;
-        qDebug() << "index square to place" << squareBoard->squares.indexOf(squareToPlace);
         for (int i = 0; i < squareToPlace->getLifeOfShip(); ++i){
         squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToPlace)+i*10) = squareToPlace;
-        qDebug() << "index square to place" << squareBoard->squares.indexOf(squareToPlace);
-        //squareBoard->checkNearby(squareBoard->getSquares().indexOf(squareToPlace));
-        qDebug() << "index square to replace" << squareBoard->squares.indexOf(squareToReplace);
         }
-        //squareBoard->getSquares().removeAll(squareToReplace);
-        //scene->removeItem(squareToReplace);
-
-        qDebug() << "stan statek" << squareToPlace->getState();
-        qDebug() << "hp statek" << squareToPlace->getLifeOfShip();
-        //squareToPlace->setIsPlaced(true);
         squareToPlace->setIsPlaced(true);
-        //list = getStates(squareBoard);
-
-
     }
     else{
-
-    qDebug() << "nie można";
     return;
     }
     squareToPlace = NULL;
@@ -93,7 +63,6 @@ void Game::shoot(Square *squareToShoot){
         return;
     }
     else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) &&
-
              (counter == squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip())){
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
@@ -109,7 +78,6 @@ void Game::shoot(Square *squareToShoot){
         brush.setColor(Qt::yellow);
         squareToShoot->setBrush(brush);
         counter++;
-
     }
     else{
         QBrush brush;
@@ -119,19 +87,15 @@ void Game::shoot(Square *squareToShoot){
     }
 }
 
-
 void Game::shootAdd(Square *squareToShoot){
     if(whosTurn == "PLAYER1"){
-
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
         cout << indexOfSquare << endl;
         temporaryShot = indexOfSquare;
     }
-
 }
 
 void Game::shootReceived(string indexReceived){
-
     if(whosTurn.toStdString() == "PLAYER2"){
         if (list.contains(std::stoi(indexReceived)-100) &&
            (1 == squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip())){
@@ -176,21 +140,17 @@ void Game::shootReceived(string indexReceived){
             listOfShootedInedxes.append(std::stoi(indexReceived));
             brush.setColor(Qt::red);
             squareBoard->squares.operator[](std::stoi(indexReceived))->setBrush(brush);
-
             //changeTurn();
         }else{
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](std::stoi(indexReceived)-OFFSET)->setBrush(brush);
             changeTurn();
         }
-
     }
     if(listOfShootedInedxes.size() == list.size()){
        // endScreen();
         close();
-
     }
-
 }
 
 QString Game::getWhosTurn(){
@@ -206,18 +166,12 @@ void Game::changeTurn(){
     }
 }
 
-
-
 void Game::start(){
-
-
     scene->clear();
     whosTurn = "NOONE";
-
     squareBoard = new SquareBoard();
     squareBoard->placeSquares(10,10,10,10);
     squareBoard->clearBlockedSquares();
-
     ship1 = new CreateShip();
     ship1->placeSquares(600,20,1,4);
     ship2 = new CreateShip();
@@ -226,7 +180,6 @@ void Game::start(){
     ship3->placeSquares(600,20+50*4,3,2);
     ship4 = new CreateShip();
     ship4->placeSquares(600,20+50*6,4,1);
-
     // create the clear button
     Button* clearButton = new Button(QString("Clear Setup"));
     int bxPos = this->width()/2 - clearButton->boundingRect().width()/2;
@@ -240,12 +193,9 @@ void Game::start(){
     int dxPos = this->width()/2 - doneButton->boundingRect().width()/2 + 250;
     int dyPos = 600;
     doneButton->setPos(dxPos,dyPos);
-
     connect(doneButton,SIGNAL(clicked()),this,SLOT(readyGame()));
     connect(doneButton,SIGNAL(doubleClicked()),this,SLOT(startGame()));
-
     scene->addItem(doneButton);
-
 }
 
 void Game::endScreen(){
@@ -256,7 +206,6 @@ void Game::endScreen(){
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::darkCyan);
     endScreenWindow->setBrush(brush);
-
     QGraphicsTextItem* text = new QGraphicsTextItem("Game Over",endScreenWindow);
     int xPos = rect().width()/2 - 10*text->boundingRect().width()/2;
     int yPos = rect().height()/2 - 10*text->boundingRect().height()/2;
@@ -265,9 +214,7 @@ void Game::endScreen(){
     scene->addItem(endScreenWindow);
 }
 
-
 void Game::readyGame(){
-
         if(pickedKlient == 0){
             isKlientReady = true;
             whosTurn = "PLAYER2";
@@ -283,13 +230,11 @@ void Game::startGame(){
     displayGameWindow();
 }
 
-int Game::getPort() const
-{
+int Game::getPort() const{
     return port;
 }
 
-void Game::setPort(int value)
-{
+void Game::setPort(int value){
     port = value;
 }
 
@@ -312,7 +257,6 @@ void Game::RulesWindow(){
     backButton->setPos(bxPos,byPos);
     connect(backButton,SIGNAL(clicked()),this,SLOT(displayMainMenu()));
     scene->addItem(backButton);
-
 }
 
 void Game::displayMainMenu(){
@@ -353,20 +297,13 @@ void Game::displayMainMenu(){
 
 void Game::displayGameWindow(){
     list = getStates(squareBoard);
-    qDebug() << "Lista indeksów:" << list;
-
-    //squareBoard->checkNearby();
-
     squareBoard->placeSquares(520,10,10,10);
-
 }
 
 void Game::displayLoggWindow(){
     Dialog MyDialog;
     MyDialog.setModal(true);
     MyDialog.exec();
-
-
     pickedKlient = MyDialog.getPickedKlient();
     if(pickedKlient == 0){
         Klient* client = new Klient();
@@ -374,9 +311,7 @@ void Game::displayLoggWindow(){
     }else{
          Serwer* host = new Serwer();
          boost::thread t2{&Serwer::startSerwer,host};
-
      }
-
 }
 
 QList<int> Game::getStates(SquareBoard* board){
@@ -387,5 +322,3 @@ QList<int> Game::getStates(SquareBoard* board){
          }
     return list;
 }
-
-

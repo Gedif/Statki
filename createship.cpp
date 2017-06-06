@@ -19,7 +19,6 @@ void CreateShip::placeSquares(int x, int y, int numOfSegments, int numOfShips){
         Square* square = new Square();
         square->setLifeOfShip(numOfSegments);
         square->setState(SHIP);
-
         square->setRect(5,5,50*numOfSegments,50);
         square->setPos(x,y);
         QBrush brush;
