@@ -49,7 +49,6 @@ public:
     bool isServerReady = false;
     QString getWhosTurn();
     QString ipAdress;
-    QString port;
     QList<int> list;
     QList<int> listOfShootedInedxes;
     QGraphicsScene* scene;
@@ -63,6 +62,9 @@ public:
     Square* squareToPlace = NULL;
     Button* doneButton;
 
+    int getPort() const;
+    void setPort(int value);
+
 public slots:
     void start();
     void readyGame();
@@ -73,6 +75,7 @@ public slots:
     void displayLoggWindow();
     void startGame();
 private:
+    int port;
 };
 
 #endif // GAME_H
