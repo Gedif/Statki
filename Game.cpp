@@ -128,8 +128,11 @@ void Game::shootReceived(string indexReceived){
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
             brush.setColor(Qt::red);
-            squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
+            Square* squareShooted = new Square();
+            squareShooted->setPos(squareBoard->squares.operator[](std::stoi(indexReceived)-100)->pos());
+            squareShooted->setBrush(brush);
             indexOfSquare = std::stoi(indexReceived);
+
         }else{
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
