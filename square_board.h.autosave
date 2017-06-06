@@ -18,20 +18,46 @@ public:
      *
      */
     SquareBoard();
-
+    /**
+     * @brief KMetoda pobierajaca kwadraty.
+     * 
+     */
     QList<Square*> getSquares();
-    QList<int> getListOfBlockedSquares(); ///<fhf
+    /**
+     * @brief Metoda pobierająca indeksy zablokowanych kwadratów.
+     * 
+     */
+    QList<int> getListOfBlockedSquares();
+    /**
+     * @brief Sette
+     * 
+     */
     void setListOfBlockedSquares(int index, int numOfSegments);
+    /**
+     * @brief Konstruktor klasy SquareBoard.
+     * 
+     */
     void clearBlockedSquares();
     // public methods
     void placeSquares(int x, int y, int cols, int rows);
     //void checkNearby();
     void checkNearby(int index);
-    //public attributes
+    /**
+     * @brief Lista utworzonych kwadratów.
+     * 
+     */
     QList<Square*> squares;
+    /**
+     * @brief Lista zablokowanych kwadratów na których nie można stawiać innych statków,tworzą obramowwanie na około postawionego statku.
+     * 
+     */
     QList<int> listOfBlockedSquares;
 
 private:
+    /**
+     * @brief Metoda tworząca kolumny kwadratów.
+     * 
+     */
     void createSquaresColumn(int x, int y, int numOfRows);
 };
 
