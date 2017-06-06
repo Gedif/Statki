@@ -83,7 +83,7 @@ void Game::placeShip(Square *squareToReplace){
     qDebug() << "nie można";
     return;
     }
-    squareToPlace = NULL;    
+    squareToPlace = NULL;
 }
 
 void Game::shoot(Square *squareToShoot){
@@ -166,6 +166,7 @@ void Game::shootReceived(string indexReceived){
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
             indexOfSquare = std::stoi(indexReceived) + OFFSET;
+            changeTurn();
          }
     }else
     {
@@ -180,7 +181,7 @@ void Game::shootReceived(string indexReceived){
         }else{
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](std::stoi(indexReceived)-OFFSET)->setBrush(brush);
-            //changeTurn();
+            changeTurn();
         }
 
     }
@@ -239,7 +240,8 @@ void Game::start(){
     int dyPos = 600;
     doneButton->setPos(dxPos,dyPos);
 
-    connect(doneButton,SIGNAL(clicked()),this,SLOT(startGame()));
+    connect(doneButton,SIGNAL(clicked()),this,SLOT(readyGame()));
+    connect(doneButton,SIGNAL(doubleClicked()),this,SLOT(startGame()));
 
     scene->addItem(doneButton);
 
@@ -262,13 +264,20 @@ void Game::endScreen(){
     scene->addItem(endScreenWindow);
 }
 
+void Game::readyGame(){
+
+        if(pickedKlient == 0){
+            isKlientReady = true;
+            whosTurn = "PLAYER2";
+        }else{
+            isServerReady = true;
+            whosTurn = "PLAYER1";
+        }
+}
+
 void Game::startGame(){
-    isReady = true;
-    if(pickedKlient  == 0){
-    whosTurn = "PLAYER2";
-    }else{
-     whosTurn = "PLAYER1";
-    }
+    isKlientReady = false;
+    isServerReady = false;
     displayGameWindow();
 }
 

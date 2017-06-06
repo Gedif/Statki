@@ -77,11 +77,18 @@ void Serwer::readThread(socket_ptr clientSock)
                     bytesRead = clientSock->read_some(buffer(enemyOutput, size));
 
                     string_ptr inMessage(new string(enemyOutput, bytesRead));
-
+                    cout << "Debuging1" << endl;
                     messageFromKlient = *inMessage;
                     if(messageFromKlient == "START"){
-                        game->whosTurn = "PLAYER1";
-                        game->doneButton->clicked();
+                        cout << "Debuging2" << endl;
+                        game->isKlientReady = true;
+                        cout << "Debuging3" << endl;
+                        if(game->isKlientReady == true && game->isServerReady == true){
+                            cout << "Debuging4" << endl;
+                            game->doneButton->doubleClicked();
+                            messageFromKlient = "default";
+                        }
+
                     }else{
                         game->shootReceived(messageFromKlient);
                         messageFromKlient = "default";
@@ -101,8 +108,11 @@ void Serwer::writeThread(socket_ptr clientSock)
     {
         int size = 32;
 
-
-            messageToKlient = to_string(game->indexOfSquare);
+            if(game->isServerReady == true){
+                 messageToKlient = "START";
+             }else{
+                 messageToKlient = to_string(game->indexOfSquare);
+             }
             if (messageToKlient != "1000")
             {
                 cout << "Strzał serwera" + messageToKlient << endl;
@@ -115,6 +125,7 @@ void Serwer::writeThread(socket_ptr clientSock)
 
         boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
     }
+
 }
 
 

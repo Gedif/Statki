@@ -60,9 +60,9 @@ void Klient::writeThread(socket_ptr sock)
 	{
 
 
-        if(game->isReady == true){
+        if(game->isKlientReady == true){
             messageToServer = "START";
-            game->isReady = false;
+            cout << "wsylam do serwera start" << endl;
         }else{
         messageToServer = to_string(game->indexOfSquare);
         }
@@ -118,6 +118,16 @@ void Klient::readThread(socket_ptr sock)
 
             if(messageFromServer != "default"){
                 cout << "Strzał otrzymany od serwera" + messageFromServer << endl;
+
+                if(messageFromServer == "START"){
+                    game->isServerReady = true;
+                    if(game->isKlientReady == true && game->isServerReady == true){
+                        cout << "Debuging" << endl;
+                        game->doneButton->doubleClicked();
+                        messageFromServer = "default";
+                    }
+
+                }else{
                 game->shootReceived(messageFromServer);
                 messageFromServer = "default";
             }
@@ -127,4 +137,5 @@ void Klient::readThread(socket_ptr sock)
     boost::this_thread::sleep(boost::posix_time::millisec(sleepLen::lon));
 	}
 
+}
 }

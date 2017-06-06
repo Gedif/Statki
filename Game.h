@@ -39,7 +39,8 @@ public:
     int temporaryShot;
     int counter = 1;
     bool pickedKlient;
-    bool isReady;
+    bool isKlientReady = false;
+    bool isServerReady = false;
     QString getWhosTurn();
     QString ipAdress;
     QString port;
@@ -58,6 +59,7 @@ public:
 
 public slots:
     void start();
+    void readyGame();
     void endScreen();
     void RulesWindow();
     void displayMainMenu();

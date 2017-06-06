@@ -24,6 +24,9 @@ void Button::mousePressEvent(QGraphicsSceneMouseEvent *event){
     emit clicked();
 }
 
+void Button::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
+    emit doubleClicked();
+}
 void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event){
     // change color to cyan
     QBrush brush;
