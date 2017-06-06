@@ -35,7 +35,8 @@ void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
     qDebug() << getState();
     if(game->whosTurn == "NOONE"){
         //układanie statkow
-        if (getState() == ship){
+        if (getState() == ship && isPlaced==false){
+
             qDebug() << "jesli to statek podnies"  << getState();
             game->pickUpShip(this);
         }
