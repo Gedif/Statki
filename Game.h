@@ -34,7 +34,7 @@ public:
      * Ustawia wielkość okna oraz ustala scene w tej samej pozycji co okno
      *
      */
-    Game(QWidget* parent=NULL);
+    Game();
 
     /**
      * @brief Event

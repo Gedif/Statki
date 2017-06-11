@@ -4,13 +4,14 @@
 #include "dialog.h"
 #include <QGraphicsTextItem>
 #include <QDebug>
+#include <QtGui>
 #include "klient.h"
 #include "Serwer.h"
 
 Klient* client;
 Serwer* host;
 
-Game::Game(QWidget *parent){
+Game::Game(){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1024,768);

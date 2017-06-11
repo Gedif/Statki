@@ -16,23 +16,27 @@ Button::Button(QString name, QGraphicsItem *parent): QGraphicsRectItem(parent){
 }
 
 void Button::mousePressEvent(QGraphicsSceneMouseEvent *event){
-    emit clicked();
+    if (event) emit clicked();
 }
 
 void Button::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
-    emit doubleClicked();
+    if (event) emit doubleClicked();
 }
 
 void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event){
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::cyan);
-    setBrush(brush);
+    if (event){
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::cyan);
+        setBrush(brush);
+    }
 }
 
 void Button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::darkCyan);
-    setBrush(brush);
+    if (event){
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::darkCyan);
+        setBrush(brush);
+    }
 }

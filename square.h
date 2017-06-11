@@ -31,7 +31,7 @@ public:
      * @brief Konstruktor klasy Square
      * @param parent klasa bazowa po której Square rozszerza.
      */
-    Square(QGraphicsItem* parent=NULL);
+    Square();
     /**
      * @brief Getter zwracająca stan danego kwadratu.
      *
@@ -51,7 +51,7 @@ public:
      * @brief Metoda odpowiadajaca za zdarzenie jakim jest kliknięcie myszką.
      * @param event Zdarzenie.
      */
-    void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     /**
      * @brief Setter ustawiajacy stan kwadratu.
      * @param stateOfSquare stan kwadratu

@@ -3,7 +3,7 @@
 
 extern Game* game;
 
-Square::Square(QGraphicsItem *parent){
+Square::Square(){
     setRect(5,5,50,50);
     setState(UNKNOWN);
     setAcceptHoverEvents(true);
@@ -23,7 +23,7 @@ int Square::getLifeOfShip(){
 
 void Square::mousePressEvent(QGraphicsSceneMouseEvent* event){
     qDebug() << getState();
-    if(game->whosTurn == "NOONE"){
+    if(game->whosTurn == "NOONE" && event != NULL){
         if (getState() == SHIP && isPlaced==false){
             game->pickUpShip(this);
         }
