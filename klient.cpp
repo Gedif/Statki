@@ -1,7 +1,6 @@
 #include "klient.h"
 #include "game.h"
 #define PORT 5000
-#define DEFAULT 1000
 #define START "START"
 #define SHORT_TIME 30
 #define LONG_TIME 50
@@ -93,7 +92,7 @@ void Klient::readThread(socket_ptr sock)
 
             if(messageFromServer == START){
                 game->isServerReady = true;
-                messageFromServer = DEFAULT;
+                messageFromServer = "default";
 
             }
             else{
