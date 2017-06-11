@@ -3,8 +3,8 @@
 #define PORT 5000
 #define DEFAULT 1000
 #define START "START"
-#define SHORT_TIME 50
-#define LONG_TIME 70
+#define SHORT_TIME 30
+#define LONG_TIME 50
 
 
 
@@ -40,22 +40,22 @@ void Klient::writeThread(socket_ptr sock)
 {
 	int size = 32;
 	for (;;){
+
+            if(game->isKlientReady == true && game->isServerReady == true){
+                game->doneButton->doubleClicked();
+
+            }
+
         messageToServer = game->message;
         if(messageToServer == "START"){
-            cout << "klient wyslal start" << endl;
             sock->write_some(buffer(messageToServer, size));
-            messageToServer == "default";
-        }else if(messageToServer =="INDEKS"){
-            messageToServer = "INDEKS";
-            sock->write_some(buffer(messageToServer, size));
+            messageToServer = "default";
+            game->message = "default";
+        }else if(messageToServer == "INDEKS"){
             messageToServer = to_string(game->indexOfSquare);
+            cout << "strezal oddany to" + messageToServer << endl;
             sock->write_some(buffer(messageToServer, size));
-            game->indexOfSquare = 1000;
-        }else if(messageToServer =="LIFE"){
-            messageToServer = "LIFE";
-            sock->write_some(buffer(messageToServer, size));
-            messageToServer = to_string(game->indexOfSquare);
-            sock->write_some(buffer(messageToServer, size));
+            game->message = "default";
         }
 
         //messageToServer = DEFAULT;
@@ -90,34 +90,20 @@ void Klient::readThread(socket_ptr sock)
             string_ptr inMessage(new string(enemyOutput, bytesRead));
             messageFromServer = *inMessage;
 
-            if(game->isKlientReady == true && game->isServerReady == true){
-                game->doneButton->doubleClicked();
-
-
-            }
 
             if(messageFromServer == START){
-                //cout << "klient odbiera start" << endl;
                 game->isServerReady = true;
                 messageFromServer = DEFAULT;
 
             }
-            else if(messageFromServer == "INDEKS" ){
-                bytesRead = sock->read_some(buffer(enemyOutput, size));
-                string_ptr inMessage(new string(enemyOutput, bytesRead));
-                messageFromServer = *inMessage;
+            else{
                 game->shootReceived(messageFromServer);
-            }else if(messageFromServer == "LIFE" ){
-                bytesRead = sock->read_some(buffer(enemyOutput, size));
-                string_ptr inMessage(new string(enemyOutput, bytesRead));
-                messageFromServer = *inMessage;
-                game->shootReceived(messageFromServer);
-                messageFromServer = DEFAULT;
-            }
+                cout << "strezal otrzymany to" + messageFromServer << endl;
 
 
-            boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
+            \
         }
-
+        boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
     }
+}
 }

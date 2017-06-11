@@ -94,7 +94,6 @@ void Game::shootAdd(Square *squareToShoot){
     if(whosTurn == "PLAYER1"){
         message = "INDEKS";
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
-        cout << indexOfSquare << endl;
         temporaryShot = indexOfSquare;
     }
 }
@@ -107,7 +106,8 @@ void Game::shootReceived(string indexReceived){
                 brush.setStyle(Qt::SolidPattern);
                 brush.setColor(Qt::red);
                 squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
-                indexOfSquare = std::stoi(indexReceived);
+                message = "INDEKS";
+                indexOfSquare = 0;
 
                 }
             else if (list.contains(std::stoi(indexReceived)-100) &&
@@ -126,35 +126,54 @@ void Game::shootReceived(string indexReceived){
                 squareBoard->squares.operator [](std::stoi(indexReceived)-100)->
                         setLifeOfShip(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
                 squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
-                indexOfSquare = std::stoi(indexReceived);
+                message = "INDEKS";
+               indexOfSquare = (squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
             }
             else{
             QBrush brush;
             brush.setStyle(Qt::SolidPattern);
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
-            indexOfSquare = std::stoi(indexReceived) + OFFSET;
+            message = "INDEKS";
+            indexOfSquare = 5;
+            cout << "zmiana tur zielony" << endl;
             changeTurn();
          }
     }else
     {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
-        if(std::stoi(indexReceived) == temporaryShot){
-            listOfShootedInedxes.append(std::stoi(indexReceived));
+        if(std::stoi(indexReceived) == 0){
+            listOfShootedInedxes.append(temporaryShot);
             brush.setColor(Qt::red);
-            squareBoard->squares.operator[](std::stoi(indexReceived))->setBrush(brush);
-            //changeTurn();
+            squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
+
+        }else if(std::stoi(indexReceived) == 1){
+            listOfShootedInedxes.append(temporaryShot);
+            brush.setColor(Qt::darkRed);
+            squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
+
+        }else if(std::stoi(indexReceived) == 2){
+            listOfShootedInedxes.append(temporaryShot);
+            brush.setColor(Qt::yellow);
+            squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
+
+        }else if(std::stoi(indexReceived) == 3){
+            listOfShootedInedxes.append(temporaryShot);
+            brush.setColor(Qt::darkYellow);
+            squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
+
         }else{
             brush.setColor(Qt::green);
-            squareBoard->squares.operator[](std::stoi(indexReceived)-OFFSET)->setBrush(brush);
+            squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
+            cout << "zmiana tur" << endl;
             changeTurn();
         }
     }
-    if(listOfShootedInedxes.size() == list.size()){
+    //if(listOfShootedInedxes.size() == list.size()){
        // endScreen();
-        close();
-    }
+       // close();
+  //  }
 }
 
 QString Game::getWhosTurn(){

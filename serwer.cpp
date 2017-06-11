@@ -4,8 +4,8 @@
 #define PORT 5000
 #define DEFAULT 1000
 #define START "START"
-#define SHORT_TIME 50
-#define LONG_TIME 70
+#define SHORT_TIME 30
+#define LONG_TIME 50
 
 
 extern Game* game;
@@ -49,12 +49,8 @@ void Serwer::readThread(socket_ptr clientSock)
             bytesRead = clientSock->read_some(buffer(enemyOutput, size));
             string_ptr inMessage(new string(enemyOutput, bytesRead));
             messageFromKlient = *inMessage;
+            cout << messageFromKlient << endl;
 
-            if(game->isKlientReady == true && game->isServerReady == true){
-
-                game->doneButton->doubleClicked();
-                messageFromKlient = DEFAULT;
-            }
 
             if(messageFromKlient == START){
                // cout << "serwer odbiera start" << endl;
@@ -62,17 +58,9 @@ void Serwer::readThread(socket_ptr clientSock)
                 messageFromKlient = DEFAULT;
 
             }
-            else if(messageFromKlient == "INDEKS" ){
-                bytesRead = clientSock->read_some(buffer(enemyOutput, size));
-                string_ptr inMessage(new string(enemyOutput, bytesRead));
-                messageFromKlient = *inMessage;
+            else{
                 game->shootReceived(messageFromKlient);
-            }else if(messageFromKlient == "LIFE" ){
-                bytesRead = clientSock->read_some(buffer(enemyOutput, size));
-                string_ptr inMessage(new string(enemyOutput, bytesRead));
-                messageFromKlient = *inMessage;
-                game->shootReceived(messageFromKlient);
-                messageFromKlient = DEFAULT;
+                cout << "strezal oddany to" + messageFromKlient << endl;
             }
         }
 
@@ -89,19 +77,23 @@ void Serwer::writeThread(socket_ptr clientSock)
     for (;;)
     {
 
+        if(game->isKlientReady == true && game->isServerReady == true){
+
+            game->doneButton->doubleClicked();
+            messageFromKlient = DEFAULT;
+        }
+
         messageToKlient = game->message;
         if(messageToKlient == START){
             clientSock->write_some(buffer(messageToKlient, size));
             messageToKlient = "default";
+            game->message = "default";
         }else if(messageToKlient == "INDEKS"){
-            clientSock->write_some(buffer(messageToKlient, size));
             messageToKlient = to_string(game->indexOfSquare);
             clientSock->write_some(buffer(messageToKlient, size));
+            cout << "strezal oddany to" + messageToKlient << endl;
+            game->message = "default";
             game->indexOfSquare = 1000;
-        }else if(messageFromKlient =="LIFE"){
-            clientSock->write_some(buffer(messageToKlient, size));
-            messageToKlient = to_string(game->indexOfSquare);
-            clientSock->write_some(buffer(messageToKlient, size));
         }
 
         boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
