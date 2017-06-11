@@ -128,7 +128,7 @@ void Game::shootReceived(string indexReceived){
                 setLifeOfShip(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
                 squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
                 message = "INDEKS";
-               indexOfSquare = (squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
+               indexOfSquare = (squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip());
             }
             else{
             QBrush brush;
