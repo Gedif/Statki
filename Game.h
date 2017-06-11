@@ -10,6 +10,7 @@
 #include <QString>
 #include <QDebug>
 #include <QGraphicsTextItem>
+#include <QMessageBox>
 #include "square_board.h"
 #include "square.h"
 #include "create_ship.h"

@@ -225,6 +225,7 @@ void Game::endScreen(){
 }
 
 void Game::readyGame(){
+    QMessageBox::information(this,"Game ended","You win");
         if(pickedKlient == 0){
             isKlientReady = true;
             cout << "zmiana klienta" << endl;
