@@ -40,11 +40,11 @@ void Klient::writeThread(socket_ptr sock)
 {
 	int size = 32;
 	for (;;){
-
-        if(game->isKlientReady == true){          
-            messageToServer = START;
-            cout << "klient wysyla start" << endl;
+        messageToServer = game->message;
+        if(messageToServer == "START"){
+            cout << "klient wyslal start" << endl;
             sock->write_some(buffer(messageToServer, size));
+            messageToServer == "default";
         }else if(messageToServer =="INDEKS"){
             messageToServer = "INDEKS";
             sock->write_some(buffer(messageToServer, size));
@@ -90,15 +90,17 @@ void Klient::readThread(socket_ptr sock)
             string_ptr inMessage(new string(enemyOutput, bytesRead));
             messageFromServer = *inMessage;
 
+            if(game->isKlientReady == true && game->isServerReady == true){
+                game->doneButton->doubleClicked();
+
+
+            }
 
             if(messageFromServer == START){
-                cout << "klient odbiera start" << endl;
+                //cout << "klient odbiera start" << endl;
                 game->isServerReady = true;
-                if(game->isKlientReady == true && game->isServerReady == true){
-                    game->doneButton->doubleClicked();
+                messageFromServer = DEFAULT;
 
-                    //messageFromServer = DEFAULT;
-                }
             }
             else if(messageFromServer == "INDEKS" ){
                 bytesRead = sock->read_some(buffer(enemyOutput, size));

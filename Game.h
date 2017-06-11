@@ -93,6 +93,7 @@ public:
     void changeTurn();
     const int OFFSET = 1;
     // public attributes
+    string message = "default";
     int indexOfSquare = 1000;
     int temporaryShot;
     int counter = 1;

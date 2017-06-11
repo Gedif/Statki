@@ -92,11 +92,7 @@ void Game::shoot(Square *squareToShoot){
 
 void Game::shootAdd(Square *squareToShoot){
     if(whosTurn == "PLAYER1"){
-        if(pickedKlient == 0){
-            client->setMessageToServer("INDEKS");
-        }else{
-            host->setMessageToKlient("INDEKS");
-        }
+        message = "INDEKS";
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
         cout << indexOfSquare << endl;
         temporaryShot = indexOfSquare;
@@ -226,6 +222,7 @@ void Game::endScreen(){
 
 void Game::readyGame(){
    // QMessageBox::information(this,"Game ended","You win");
+    message = "START";
         if(pickedKlient == 0){
             isKlientReady = true;
             cout << "zmiana klienta" << endl;

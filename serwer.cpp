@@ -50,14 +50,17 @@ void Serwer::readThread(socket_ptr clientSock)
             string_ptr inMessage(new string(enemyOutput, bytesRead));
             messageFromKlient = *inMessage;
 
-            if(messageFromKlient == START){
-                cout << "serwer odbiera start" << endl;
-                game->isKlientReady = true;
-                if(game->isKlientReady == true && game->isServerReady == true){
+            if(game->isKlientReady == true && game->isServerReady == true){
 
-                    game->doneButton->doubleClicked();
-                    messageFromKlient = DEFAULT;
-                }
+                game->doneButton->doubleClicked();
+                messageFromKlient = DEFAULT;
+            }
+
+            if(messageFromKlient == START){
+               // cout << "serwer odbiera start" << endl;
+                game->isKlientReady = true;
+                messageFromKlient = DEFAULT;
+
             }
             else if(messageFromKlient == "INDEKS" ){
                 bytesRead = clientSock->read_some(buffer(enemyOutput, size));
@@ -86,13 +89,11 @@ void Serwer::writeThread(socket_ptr clientSock)
     for (;;)
     {
 
-
-        if(game->isServerReady == true){
-            messageToKlient = START;
-            cout << "serwer wysyla start" << endl;
+        messageToKlient = game->message;
+        if(messageToKlient == START){
             clientSock->write_some(buffer(messageToKlient, size));
+            messageToKlient = "default";
         }else if(messageToKlient == "INDEKS"){
-
             clientSock->write_some(buffer(messageToKlient, size));
             messageToKlient = to_string(game->indexOfSquare);
             clientSock->write_some(buffer(messageToKlient, size));
