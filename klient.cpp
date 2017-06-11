@@ -43,7 +43,7 @@ void Klient::writeThread(socket_ptr sock)
 
         if(game->isKlientReady == true){          
             messageToServer = START;
-            cout << "wiadomosc start wysłana" << endl;
+            cout << "klient wysyla start" << endl;
             sock->write_some(buffer(messageToServer, size));
         }else if(messageToServer =="INDEKS"){
             messageToServer = "INDEKS";
@@ -92,17 +92,23 @@ void Klient::readThread(socket_ptr sock)
 
 
             if(messageFromServer == START){
-                cout << "wiadomosc start odebrana" << endl;
+                cout << "klient odbiera start" << endl;
                 game->isServerReady = true;
                 if(game->isKlientReady == true && game->isServerReady == true){
                     game->doneButton->doubleClicked();
-                    messageFromServer = DEFAULT;
+
+                    //messageFromServer = DEFAULT;
                 }
             }
             else if(messageFromServer == "INDEKS" ){
+                bytesRead = sock->read_some(buffer(enemyOutput, size));
+                string_ptr inMessage(new string(enemyOutput, bytesRead));
+                messageFromServer = *inMessage;
                 game->shootReceived(messageFromServer);
-                messageFromServer = DEFAULT;
             }else if(messageFromServer == "LIFE" ){
+                bytesRead = sock->read_some(buffer(enemyOutput, size));
+                string_ptr inMessage(new string(enemyOutput, bytesRead));
+                messageFromServer = *inMessage;
                 game->shootReceived(messageFromServer);
                 messageFromServer = DEFAULT;
             }

@@ -51,9 +51,10 @@ void Serwer::readThread(socket_ptr clientSock)
             messageFromKlient = *inMessage;
 
             if(messageFromKlient == START){
-                cout << "wiadomosc start odebrana" << endl;
+                cout << "serwer odbiera start" << endl;
                 game->isKlientReady = true;
                 if(game->isKlientReady == true && game->isServerReady == true){
+
                     game->doneButton->doubleClicked();
                     messageFromKlient = DEFAULT;
                 }
@@ -88,7 +89,7 @@ void Serwer::writeThread(socket_ptr clientSock)
 
         if(game->isServerReady == true){
             messageToKlient = START;
-            cout << "wiadomosc start wysłana" << endl;
+            cout << "serwer wysyla start" << endl;
             clientSock->write_some(buffer(messageToKlient, size));
         }else if(messageToKlient == "INDEKS"){
 
