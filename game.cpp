@@ -100,6 +100,7 @@ void Game::shootAdd(Square *squareToShoot){
 }
 
 void Game::shootReceived(string indexReceived){
+    qDebug() << "lista" << list;
     if(whosTurn.toStdString() == "PLAYER2"){
         if (list.contains(std::stoi(indexReceived)-100) &&
            (1 == squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip())){
@@ -109,7 +110,6 @@ void Game::shootReceived(string indexReceived){
                 squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
                 message = "INDEKS";
                 indexOfSquare = 0;
-
                 }
             else if (list.contains(std::stoi(indexReceived)-100) &&
                      squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip() > 1){
@@ -125,7 +125,7 @@ void Game::shootReceived(string indexReceived){
                 brush.setColor(Qt::darkRed);
                 }
                 squareBoard->squares.operator [](std::stoi(indexReceived)-100)->
-                        setLifeOfShip(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
+                setLifeOfShip(squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
                 squareBoard->squares.operator[](std::stoi(indexReceived)-100)->setBrush(brush);
                 message = "INDEKS";
                indexOfSquare = (squareBoard->squares.operator [](std::stoi(indexReceived)-100)->getLifeOfShip()-1);
@@ -291,6 +291,7 @@ void Game::displayMainMenu(){
 
 void Game::displayGameWindow(){
     list = getStates(squareBoard);
+    qDebug() << "lista" << list;
     squareBoard->placeSquares(520,10,10,10);
 }
 
@@ -311,7 +312,7 @@ void Game::displayLoggWindow(){
 QList<int> Game::getStates(SquareBoard* board){
     list.clear();
     for (int i = 0; i < board->getSquares().size(); ++i) {
-        if (board->getSquares().at(i)->getState() == 3)
+        if (board->getSquares().at(i)->getState() > 0)
             list.append(i);
          }
     return list;
