@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <QGraphicsTextItem>
 #include <QMessageBox>
+#include <QApplication>
 #include "square_board.h"
 #include "square.h"
 #include "create_ship.h"
@@ -113,6 +114,7 @@ public:
     QString whosTurn;
     QPointF originalPos;
     Square* squareToPlace = NULL;
+     //to edit
     Button* doneButton;
 
     int getPort();
