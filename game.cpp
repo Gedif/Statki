@@ -92,6 +92,11 @@ void Game::shoot(Square *squareToShoot){
 
 void Game::shootAdd(Square *squareToShoot){
     if(whosTurn == "PLAYER1"){
+        if(pickedKlient == 0){
+            client->setMessageToServer("INDEKS");
+        }else{
+            host->setMessageToKlient("INDEKS");
+        }
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
         cout << indexOfSquare << endl;
         temporaryShot = indexOfSquare;

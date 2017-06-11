@@ -86,7 +86,7 @@ void Serwer::writeThread(socket_ptr clientSock)
     {
 
 
-        if(game->isKlientReady == true){
+        if(game->isServerReady == true){
             messageToKlient = START;
             cout << "wiadomosc start wysłana" << endl;
             clientSock->write_some(buffer(messageToKlient, size));
