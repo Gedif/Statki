@@ -5,17 +5,40 @@
 #include "square.h"
 #include "QBrush"
 
+/**
+ * @brief Klasa create_ship.
+ *
+ * Klasa odpowiada za utworzenie statków dziedziczących po klasie Square.
+ * Obiekt ten tworzy prostokąt o odpowiedniej szerokości .
+ */
+
 class CreateShip: public Square{
 public:
-    // constructors
+    /**
+     * @brief Konstruktor klasy create_ship
+     *
+     * Stworzony obiekt jest pusty dopiero metoda tworząca i rozmieszczająca statki na planszy
+     * sprawia, że obiekt tej klasy tworzy listę kwadratów składających się na statek oraz liczbę segmentów w danym statku
+     *
+     */
     CreateShip();
 
-    // getters/setters
+    /**
+     * @brief Getter statków skłądających się na obiekt
+     *
+     * Zwraca listę obiekrtów klasy Square, które składają się na statek
+     *
+     */
     QList<Square*> getShips();
     int getNumOfSegments();
     void setNumOfSegments(int num);
 
-    // public methods
+    /**
+     * @brief Publiczna metoda
+     *
+     * Rozmieszcza daną ilość kwadratów w danym miejscu sceny
+     *
+     */
     void placeSquares(int x, int y, int num_of_segment, int numOfShips);
 
 private:

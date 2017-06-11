@@ -42,6 +42,10 @@ public:
     void writeThread(socket_ptr clientSock);
 
 
+    string getMessageFromKlient() const;
+
+    void setMessageToKlient(const string &value);
+
 private:
     /**
      * @brief Wiadomość od klienta.

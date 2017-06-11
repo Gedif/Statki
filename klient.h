@@ -51,6 +51,12 @@ public:
      */
     void writeThread(socket_ptr sock);
 
+
+
+    void setMessageToServer(const string &value);
+
+    string getMessageFromServer() const;
+
 private:
     /**
      * @brief Wiadomość od serwera

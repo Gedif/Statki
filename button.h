@@ -5,10 +5,22 @@
 #include <QGraphicsTextItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QBrush>
+
+/**
+ * @brief Klasa button.
+ *
+ * Klasa odpowiada za utworzenie objektu przycisku dziedziczącego po QObjekt i QGraphicsRectItem.
+ * Obiekt ten posiada zdolność reagowania na QGraphicsSceneMouseEvent.
+ */
 class Button:public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    // constructors
+    /**
+     * @brief Konstruktor klasy button
+     *
+     * Stworzony obiekt posiada teks na nim wyświtlany, miejsce w przestrzeni i rozmiary przycisku
+     *
+     */
     Button(QString name, QGraphicsItem* parent=NULL);
 
     // public methods (events)

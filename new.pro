@@ -24,42 +24,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES +=\
-    Square.cpp \
-    SquareBoard.cpp \
-    Button.cpp \
     main.cpp \
-    CreateShip.cpp \
-    Game.cpp \
-    Klient.cpp \
-    Serwer.cpp \
-    Dialog.cpp
+    button.cpp \
+    create_ship.cpp \
+    dialog.cpp \
+    game.cpp \
+    klient.cpp \
+    serwer.cpp \
+    square.cpp \
+    square_board.cpp
 
 HEADERS  += \
-    Square.h \
-    SquareBoard.h \
-    Button.h \
-    Game.h \
-    CreateShip.h \
-<<<<<<< HEAD
-    klient.h \
-=======
-    Klient.h \
     serwer.h \
->>>>>>> fc60c2b2cef2f0c9b909c30b611d9b86bbcef3c8
-    Dialog.h
+    button.h \
+    create_ship.h \
+    dialog.h \
+    game.h \
+    klient.h \
+    square_board.h \
+    square.h
 
 FORMS    += \
     dialog.ui
 
-INCLUDEPATH += F:/boost_1_64_0
-DEPENDPATH += F:/boost_1_64_0
 
-LIBS += -LF:/boost_1_64_0/stage/lib/ -llibboost_system-vc140-mt-gd-1_64
-
-<<<<<<< HEAD
-INCLUDEPATH += F:/boost_1_64_0/stage
-DEPENDPATH += F:/boost_1_64_0/stage
-=======
 INCLUDEPATH += G:/boost_1_63_0
 DEPENDPATH += G:/boost_1_63_0
 
@@ -69,4 +57,4 @@ LIBS += -LG:/boost_1_63_0/stage/lib/ -llibboost_system-vc140-mt-gd-1_63
 
 INCLUDEPATH += G:/boost_1_63_0/stage
 DEPENDPATH += G:/boost_1_63_0/stage
->>>>>>> fc60c2b2cef2f0c9b909c30b611d9b86bbcef3c8
+

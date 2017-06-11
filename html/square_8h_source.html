@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Gra w statki: Plik źródłowy square.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Gra w statki
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">square.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SQUARE_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SQUARE_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QGraphicsRectItem&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QGraphicsSceneMouseEvent&gt;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QList&gt;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;QBrush&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QRectF&gt;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QVector&gt;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">enum</span> state</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    UNKNOWN,</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    SHIP</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_square.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_square.html">Square</a>: <span class="keyword">public</span> QGraphicsRectItem{</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_square.html#a8f3476426f0bcca5051e0f9193e7a8d8">Square</a>(QGraphicsItem* parent=NULL);</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_square.html#a21a4d8dc3a996207202a83b77c992a00">getState</a>();</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_square.html#a32289f1abb72eb82dd238aeb928edf3e">getIsPlaced</a>();</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_square.html#a303e4db4d63b84845c18ca2b1b4bd14a">getLifeOfShip</a>();</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square.html#aefa80b148590427de8e9f74f10e8788a">mousePressEvent</a>(QGraphicsSceneMouseEvent* event);</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square.html#afb9e092b77d0eb1028405a8badf2e810">setState</a>(state satateOfSquare);</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square.html#a50991a5029a2103ac0a8314c7b21e48d">setIsPlaced</a>(<span class="keywordtype">bool</span> isIt);</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square.html#ad20705e3aa6a3839cd86db18bed0ba04">setLifeOfShip</a>(<span class="keywordtype">int</span> health_points);</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">int</span> lifeOfSship_ = 0;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> isPlaced = <span class="keyword">false</span>;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    QString owner;</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    state state_;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif // SQUARE_H</span></div><div class="ttc" id="class_square_html_a32289f1abb72eb82dd238aeb928edf3e"><div class="ttname"><a href="class_square.html#a32289f1abb72eb82dd238aeb928edf3e">Square::getIsPlaced</a></div><div class="ttdeci">bool getIsPlaced()</div><div class="ttdoc">Getter zwracający flagę określająca czy kwadrat jest juz umiejscowiony. </div><div class="ttdef"><b>Definition:</b> Square.cpp:16</div></div>
+<div class="ttc" id="class_square_html"><div class="ttname"><a href="class_square.html">Square</a></div><div class="ttdoc">Klasa Square. </div><div class="ttdef"><b>Definition:</b> square.h:28</div></div>
+<div class="ttc" id="class_square_html_a303e4db4d63b84845c18ca2b1b4bd14a"><div class="ttname"><a href="class_square.html#a303e4db4d63b84845c18ca2b1b4bd14a">Square::getLifeOfShip</a></div><div class="ttdeci">int getLifeOfShip()</div><div class="ttdoc">Getter zwracająca życie statku. </div><div class="ttdef"><b>Definition:</b> Square.cpp:20</div></div>
+<div class="ttc" id="class_square_html_a8f3476426f0bcca5051e0f9193e7a8d8"><div class="ttname"><a href="class_square.html#a8f3476426f0bcca5051e0f9193e7a8d8">Square::Square</a></div><div class="ttdeci">Square(QGraphicsItem *parent=NULL)</div><div class="ttdoc">Konstruktor klasy Square. </div><div class="ttdef"><b>Definition:</b> Square.cpp:6</div></div>
+<div class="ttc" id="class_square_html_a50991a5029a2103ac0a8314c7b21e48d"><div class="ttname"><a href="class_square.html#a50991a5029a2103ac0a8314c7b21e48d">Square::setIsPlaced</a></div><div class="ttdeci">void setIsPlaced(bool isIt)</div><div class="ttdoc">Settter ustawiający flagę połozenia kwadratu. </div><div class="ttdef"><b>Definition:</b> Square.cpp:46</div></div>
+<div class="ttc" id="class_square_html_afb9e092b77d0eb1028405a8badf2e810"><div class="ttname"><a href="class_square.html#afb9e092b77d0eb1028405a8badf2e810">Square::setState</a></div><div class="ttdeci">void setState(state satateOfSquare)</div><div class="ttdoc">Setter ustawiajacy stan kwadratu. </div><div class="ttdef"><b>Definition:</b> Square.cpp:42</div></div>
+<div class="ttc" id="class_square_html_a21a4d8dc3a996207202a83b77c992a00"><div class="ttname"><a href="class_square.html#a21a4d8dc3a996207202a83b77c992a00">Square::getState</a></div><div class="ttdeci">int getState()</div><div class="ttdoc">Getter zwracająca stan danego kwadratu. </div><div class="ttdef"><b>Definition:</b> Square.cpp:12</div></div>
+<div class="ttc" id="class_square_html_ad20705e3aa6a3839cd86db18bed0ba04"><div class="ttname"><a href="class_square.html#ad20705e3aa6a3839cd86db18bed0ba04">Square::setLifeOfShip</a></div><div class="ttdeci">void setLifeOfShip(int health_points)</div><div class="ttdoc">Setter ustawiajacy punkty życia. </div><div class="ttdef"><b>Definition:</b> Square.cpp:50</div></div>
+<div class="ttc" id="class_square_html_aefa80b148590427de8e9f74f10e8788a"><div class="ttname"><a href="class_square.html#aefa80b148590427de8e9f74f10e8788a">Square::mousePressEvent</a></div><div class="ttdeci">void mousePressEvent(QGraphicsSceneMouseEvent *event)</div><div class="ttdoc">Metoda odpowiadajaca za zdarzenie jakim jest kliknięcie myszką. </div><div class="ttdef"><b>Definition:</b> Square.cpp:24</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

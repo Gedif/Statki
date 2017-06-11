@@ -4,9 +4,11 @@
 #include "dialog.h"
 #include <QGraphicsTextItem>
 #include <QDebug>
-
 #include "klient.h"
 #include "Serwer.h"
+
+Klient* client;
+Serwer* host;
 
 Game::Game(QWidget *parent){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -15,6 +17,7 @@ Game::Game(QWidget *parent){
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1024,768);
     setScene(scene);
+
 }
 
 void Game::mouseMoveEvent(QMouseEvent *event){
@@ -193,8 +196,10 @@ void Game::start(){
     int dxPos = this->width()/2 - doneButton->boundingRect().width()/2 + 250;
     int dyPos = 600;
     doneButton->setPos(dxPos,dyPos);
+    //if (list.size()==20){
     connect(doneButton,SIGNAL(clicked()),this,SLOT(readyGame()));
     connect(doneButton,SIGNAL(doubleClicked()),this,SLOT(startGame()));
+    //}
     scene->addItem(doneButton);
 }
 
@@ -206,7 +211,7 @@ void Game::endScreen(){
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::darkCyan);
     endScreenWindow->setBrush(brush);
-    QGraphicsTextItem* text = new QGraphicsTextItem("Game Over",endScreenWindow);
+    QGraphicsTextItem* text = new QGraphicsTextItem("You Win",endScreenWindow);
     int xPos = rect().width()/2 - 10*text->boundingRect().width()/2;
     int yPos = rect().height()/2 - 10*text->boundingRect().height()/2;
     text->setPos(xPos,yPos);
@@ -217,9 +222,11 @@ void Game::endScreen(){
 void Game::readyGame(){
         if(pickedKlient == 0){
             isKlientReady = true;
+            cout << "zmiana klienta" << endl;
             whosTurn = "PLAYER2";
         }else{
             isServerReady = true;
+            cout << "zmiana serwera" << endl;
             whosTurn = "PLAYER1";
         }
 }
@@ -228,27 +235,6 @@ void Game::startGame(){
     isKlientReady = false;
     isServerReady = false;
     displayGameWindow();
-}
-
-void Game::RulesWindow(){
-    // clear the screen
-    scene->clear();
-    // create the rules text
-    QGraphicsTextItem* rulesText = new QGraphicsTextItem(QString("Rules"));
-    QFont rulesFont("comic sans",50);
-    rulesText->setFont(rulesFont);
-    int rxPos = this->width()/2 - rulesText->boundingRect().width()/2;
-    int ryPos = 150;
-    rulesText->setPos(rxPos,ryPos);
-    scene->addItem(rulesText);
-
-    // create the back button
-    Button* backButton = new Button(QString("Back"));
-    int bxPos = this->width()/2 - backButton->boundingRect().width()/2;
-    int byPos = 600;
-    backButton->setPos(bxPos,byPos);
-    connect(backButton,SIGNAL(clicked()),this,SLOT(displayMainMenu()));
-    scene->addItem(backButton);
 }
 
 void Game::displayMainMenu(){
@@ -270,18 +256,11 @@ void Game::displayMainMenu(){
     connect(playButton,SIGNAL(clicked()),this,SLOT(displayLoggWindow()));
     scene->addItem(playButton);
 
-    // creat the rules button
-    Button* rulesButton = new Button(QString("Rules"));
-    int rxPos = this->width()/2 - rulesButton->boundingRect().width()/2;
-    int ryPos = 350;
-    rulesButton->setPos(rxPos,ryPos);
-    connect(rulesButton,SIGNAL(clicked()),this,SLOT(RulesWindow()));
-    scene->addItem(rulesButton);
 
     // create the quit button
     Button* quitButton = new Button(QString("Quit"));
     int qxPos = this->width()/2 - quitButton->boundingRect().width()/2;
-    int qyPos = 425;
+    int qyPos = 350;
     quitButton->setPos(qxPos,qyPos);
     connect(quitButton,SIGNAL(clicked()),this,SLOT(close()));
     scene->addItem(quitButton);
@@ -298,10 +277,10 @@ void Game::displayLoggWindow(){
     MyDialog.exec();
     pickedKlient = MyDialog.getPickedKlient();
     if(pickedKlient == 0){
-        Klient* client = new Klient();
+        client = new Klient();
         boost::thread t2{&Klient::startKlient,client};
     }else{
-         Serwer* host = new Serwer();
+         host = new Serwer();
          boost::thread t2{&Serwer::startSerwer,host};
      }
 }

@@ -2,11 +2,10 @@
 #include "klient.h"
 #include "game.h"
 #define PORT 5000
-#define DEFAULT "default"
+#define DEFAULT 1000
 #define START "START"
 #define SHORT_TIME 50
 #define LONG_TIME 70
-#define DEFAULT_INDEX "1000"
 
 
 extern Game* game;
@@ -19,7 +18,7 @@ int Serwer:: startSerwer()
     {
         socket_ptr clientSock(new tcp::socket(service2));
         acceptor.accept(*clientSock);
-
+    
         boost::thread_group threads;
         threads.create_thread(boost::bind(&Serwer::readThread,this,boost::ref(clientSock)));
         boost::this_thread::sleep(boost::posix_time::millisec(SHORT_TIME));
@@ -46,20 +45,30 @@ void Serwer::readThread(socket_ptr clientSock)
 
     for (;;){
         if (clientSock->available()){
-
+            
             bytesRead = clientSock->read_some(buffer(enemyOutput, size));
             string_ptr inMessage(new string(enemyOutput, bytesRead));
-
             messageFromKlient = *inMessage;
-            if(messageFromKlient == "START"){
+
+            if(messageFromKlient == START){
+                cout << "wiadomosc start odebrana" << endl;
                 game->isKlientReady = true;
                 if(game->isKlientReady == true && game->isServerReady == true){
                     game->doneButton->doubleClicked();
-                    messageFromKlient = "default";
+                    messageFromKlient = DEFAULT;
                 }
-            }else{
+            }
+            else if(messageFromKlient == "INDEKS" ){
+                bytesRead = clientSock->read_some(buffer(enemyOutput, size));
+                string_ptr inMessage(new string(enemyOutput, bytesRead));
+                messageFromKlient = *inMessage;
                 game->shootReceived(messageFromKlient);
-                messageFromKlient = "default";
+            }else if(messageFromKlient == "LIFE" ){
+                bytesRead = clientSock->read_some(buffer(enemyOutput, size));
+                string_ptr inMessage(new string(enemyOutput, bytesRead));
+                messageFromKlient = *inMessage;
+                game->shootReceived(messageFromKlient);
+                messageFromKlient = DEFAULT;
             }
         }
 
@@ -73,27 +82,37 @@ void Serwer::readThread(socket_ptr clientSock)
 void Serwer::writeThread(socket_ptr clientSock)
 {
     int size = 32;
-    for (;;){
-         if(game->isServerReady == true){
-         messageToKlient = "START";
-         }else{
+    for (;;)
+    {
+
+
+        if(game->isKlientReady == true){
+            messageToKlient = START;
+            cout << "wiadomosc start wysłana" << endl;
+            clientSock->write_some(buffer(messageToKlient, size));
+        }else if(messageToKlient == "INDEKS"){
+
+            clientSock->write_some(buffer(messageToKlient, size));
             messageToKlient = to_string(game->indexOfSquare);
-         }
-
-         if (messageToKlient != DEFAULT_INDEX){
-                cout << "Strzał serwera" + messageToKlient << endl;
-                clientSock->write_some(buffer(messageToKlient, size));
-         }
-
-
-        messageToKlient = DEFAULT;
-        game->indexOfSquare = std::stoi(DEFAULT_INDEX);;
+            clientSock->write_some(buffer(messageToKlient, size));
+            game->indexOfSquare = 1000;
+        }else if(messageFromKlient =="LIFE"){
+            clientSock->write_some(buffer(messageToKlient, size));
+            messageToKlient = to_string(game->indexOfSquare);
+            clientSock->write_some(buffer(messageToKlient, size));
+        }
 
         boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
     }
 
 }
 
+string Serwer::getMessageFromKlient() const
+{
+    return messageFromKlient;
+}
 
-
-
+void Serwer::setMessageToKlient(const string &value)
+{
+    messageToKlient = value;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Gra w statki: Plik źródłowy square_board.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Gra w statki
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">square_board.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SQUAREBOARD_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SQUAREBOARD_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QList&gt;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;square.h&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;QBrush&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_square_board.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_square_board.html">SquareBoard</a>{</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_square_board.html#aa4c0bfc07e7168e32204097e6a0276ba">SquareBoard</a>();</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    QList&lt;Square*&gt; <a class="code" href="class_square_board.html#af46ba15177d00cb6370c3e82bc0fca10">getSquares</a>();</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    QList&lt;int&gt; <a class="code" href="class_square_board.html#a2da2e302fa3565085fc278afa19f2240">getListOfBlockedSquares</a>();</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square_board.html#a34d7a137e147e34259202901d7853200">setListOfBlockedSquares</a>(<span class="keywordtype">int</span> index, <span class="keywordtype">int</span> numOfSegments);</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square_board.html#af9a7112080713bf97406c16ea2c2eedc">clearBlockedSquares</a>();</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square_board.html#ab2ffd0dbc83428dc0c4140d9a3518409">placeSquares</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> cols, <span class="keywordtype">int</span> rows);</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_square_board.html#a298a7bfa1767688fc6e8d48149b5ede4">checkNearby</a>(<span class="keywordtype">int</span> index);</div><div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_square_board.html#a1646cdba74dec0693c887ad3dd2a8352">   63</a></span>&#160;    QList&lt;Square*&gt; <a class="code" href="class_square_board.html#a1646cdba74dec0693c887ad3dd2a8352">squares</a>;</div><div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_square_board.html#adb2675b32c0ad2437aa1cfa7cbcd3af8">   68</a></span>&#160;    QList&lt;int&gt; <a class="code" href="class_square_board.html#adb2675b32c0ad2437aa1cfa7cbcd3af8">listOfBlockedSquares</a>;</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> createSquaresColumn(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> numOfRows);</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif // SQUAREBOARD_H</span></div><div class="ttc" id="class_square_board_html_a34d7a137e147e34259202901d7853200"><div class="ttname"><a href="class_square_board.html#a34d7a137e147e34259202901d7853200">SquareBoard::setListOfBlockedSquares</a></div><div class="ttdeci">void setListOfBlockedSquares(int index, int numOfSegments)</div><div class="ttdoc">Setterustawiajacy listę blokowanych kwadratów. </div><div class="ttdef"><b>Definition:</b> square_board.cpp:36</div></div>
+<div class="ttc" id="class_square_board_html_a2da2e302fa3565085fc278afa19f2240"><div class="ttname"><a href="class_square_board.html#a2da2e302fa3565085fc278afa19f2240">SquareBoard::getListOfBlockedSquares</a></div><div class="ttdeci">QList&lt; int &gt; getListOfBlockedSquares()</div><div class="ttdoc">Metoda pobierająca indeksy zablokowanych kwadratów. </div></div>
+<div class="ttc" id="class_square_board_html_a1646cdba74dec0693c887ad3dd2a8352"><div class="ttname"><a href="class_square_board.html#a1646cdba74dec0693c887ad3dd2a8352">SquareBoard::squares</a></div><div class="ttdeci">QList&lt; Square * &gt; squares</div><div class="ttdoc">Lista utworzonych kwadratów. </div><div class="ttdef"><b>Definition:</b> square_board.h:63</div></div>
+<div class="ttc" id="class_square_board_html_aa4c0bfc07e7168e32204097e6a0276ba"><div class="ttname"><a href="class_square_board.html#aa4c0bfc07e7168e32204097e6a0276ba">SquareBoard::SquareBoard</a></div><div class="ttdeci">SquareBoard()</div><div class="ttdoc">Konstruktor klasy SquareBoard. </div><div class="ttdef"><b>Definition:</b> square_board.cpp:6</div></div>
+<div class="ttc" id="class_square_board_html_a298a7bfa1767688fc6e8d48149b5ede4"><div class="ttname"><a href="class_square_board.html#a298a7bfa1767688fc6e8d48149b5ede4">SquareBoard::checkNearby</a></div><div class="ttdeci">void checkNearby(int index)</div><div class="ttdoc">Metoda sprawdzająca okolice danego indeksu. </div></div>
+<div class="ttc" id="class_square_board_html_adb2675b32c0ad2437aa1cfa7cbcd3af8"><div class="ttname"><a href="class_square_board.html#adb2675b32c0ad2437aa1cfa7cbcd3af8">SquareBoard::listOfBlockedSquares</a></div><div class="ttdeci">QList&lt; int &gt; listOfBlockedSquares</div><div class="ttdoc">Lista zablokowanych kwadratów na których nie można stawiać innych statków,tworzą obramowwanie na okoł...</div><div class="ttdef"><b>Definition:</b> square_board.h:68</div></div>
+<div class="ttc" id="class_square_board_html_ab2ffd0dbc83428dc0c4140d9a3518409"><div class="ttname"><a href="class_square_board.html#ab2ffd0dbc83428dc0c4140d9a3518409">SquareBoard::placeSquares</a></div><div class="ttdeci">void placeSquares(int x, int y, int cols, int rows)</div><div class="ttdoc">Metoa ustawiajaca kwadraty. </div><div class="ttdef"><b>Definition:</b> square_board.cpp:13</div></div>
+<div class="ttc" id="class_square_board_html"><div class="ttname"><a href="class_square_board.html">SquareBoard</a></div><div class="ttdoc">Klasa odpowiadajaca za plansze do gry. Tworzy serię kwadratów na których toczy się rozgrywka...</div><div class="ttdef"><b>Definition:</b> square_board.h:14</div></div>
+<div class="ttc" id="class_square_board_html_af9a7112080713bf97406c16ea2c2eedc"><div class="ttname"><a href="class_square_board.html#af9a7112080713bf97406c16ea2c2eedc">SquareBoard::clearBlockedSquares</a></div><div class="ttdeci">void clearBlockedSquares()</div><div class="ttdoc">Metoda czyszczaca zablokowane kwadraty. </div><div class="ttdef"><b>Definition:</b> square_board.cpp:63</div></div>
+<div class="ttc" id="class_square_board_html_af46ba15177d00cb6370c3e82bc0fca10"><div class="ttname"><a href="class_square_board.html#af46ba15177d00cb6370c3e82bc0fca10">SquareBoard::getSquares</a></div><div class="ttdeci">QList&lt; Square * &gt; getSquares()</div><div class="ttdoc">KMetoda pobierajaca kwadraty. </div><div class="ttdef"><b>Definition:</b> square_board.cpp:9</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>
