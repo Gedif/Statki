@@ -148,22 +148,10 @@ void Game::shootReceived(string indexReceived){
             listOfShootedInedxes.append(temporaryShot);
             brush.setColor(Qt::red);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
-
-        }else if(std::stoi(indexReceived) == 1){
-            listOfShootedInedxes.append(temporaryShot);
-            brush.setColor(Qt::darkRed);
-            squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
-
-        }else if(std::stoi(indexReceived) == 2){
+        }else if(std::stoi(indexReceived) > 0 && std::stoi(indexReceived) < 5){
             listOfShootedInedxes.append(temporaryShot);
             brush.setColor(Qt::yellow);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
-
-        }else if(std::stoi(indexReceived) == 3){
-            listOfShootedInedxes.append(temporaryShot);
-            brush.setColor(Qt::darkYellow);
-            squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
-
         }else{
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
