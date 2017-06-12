@@ -55,6 +55,10 @@ void Klient::writeThread(socket_ptr sock)
             cout << "strezal oddany to" + messageToServer << endl;
             sock->write_some(buffer(messageToServer, size));
             game->message = "default";
+        }else if(messageToServer == "END"){
+            sock->write_some(buffer(messageToServer, size));
+            messageToServer = "default";
+            game->message = "default";
         }
 
         //messageToServer = DEFAULT;
@@ -94,6 +98,9 @@ void Klient::readThread(socket_ptr sock)
                 game->isServerReady = true;
                 messageFromServer = "default";
 
+            }else if(messageFromServer == "END"){
+                game->gameEnded = true;
+                messageFromServer = "default";
             }
             else{
                 game->shootReceived(messageFromServer);

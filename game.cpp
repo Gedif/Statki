@@ -101,11 +101,23 @@ void Game::shoot(Square *squareToShoot){
 }
 
 void Game::shootAdd(Square *squareToShoot){
-    if(whosTurn == "PLAYER1"){
-        message = "INDEKS";
-        indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
-        temporaryShot = indexOfSquare;
+    if(listOfShootedInedxes.size() == list.size()){
+        QMessageBox::information(this,"Info","KONIEC GRY");
+        message = "END";
+    }else if(gameEnded == true){
+       QMessageBox::information(this,"Info","KONIEC GRY");
     }
+    else if(whosTurn == "PLAYER1"){
+
+        indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
+        if(indexOfSquare >= 100){
+        message = "INDEKS";
+        temporaryShot = indexOfSquare;
+        }else{
+           QMessageBox::information(this,"Info","Nie mozesz tutaj strzelac");
+        }
+    }
+
 }
 
 void Game::shootReceived(string indexReceived){

@@ -99,6 +99,7 @@ public:
     int temporaryShot;
     int counter = 1;
     bool pickedKlient;
+    bool gameEnded = false;
     bool isKlientReady = false;
     bool isServerReady = false;
     QString getWhosTurn();

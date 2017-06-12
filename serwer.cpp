@@ -57,6 +57,9 @@ void Serwer::readThread(socket_ptr clientSock)
                 game->isKlientReady = true;
                 messageFromKlient = DEFAULT;
 
+            }else if(messageFromKlient == "END"){
+                game->gameEnded = true;
+                messageFromKlient = "default";
             }
             else{
                 game->shootReceived(messageFromKlient);
@@ -94,6 +97,10 @@ void Serwer::writeThread(socket_ptr clientSock)
             cout << "strezal oddany to" + messageToKlient << endl;
             game->message = "default";
             game->indexOfSquare = 1000;
+        }else if(messageToKlient == "END"){
+            clientSock->write_some(buffer(messageToKlient, size));
+            messageToKlient = "default";
+            game->message = "default";
         }
 
         boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
