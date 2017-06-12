@@ -149,7 +149,6 @@ public slots:
      *
      */
     void displayLoggWindow();
-    void startGame();
 private:
     int port;
 

@@ -113,7 +113,7 @@ void Game::shootAdd(Square *squareToShoot){
     }
     else if(whosTurn == "PLAYER1"){
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
-        if(indexOfSquare >= 100){
+        if(indexOfSquare >= 100 && !listOfShootedInedxes.contains(indexOfSquare)){
         message = "INDEKS";
         temporaryShot = indexOfSquare;
         }else{
@@ -244,11 +244,13 @@ void Game::start(){
     int dyPos = 600;
     doneButton->setPos(dxPos,dyPos);
     connect(doneButton,SIGNAL(clicked()),this,SLOT(readyGame()));
-    connect(doneButton,SIGNAL(doubleClicked()),this,SLOT(startGame()));
+
     scene->addItem(doneButton);
 }
 
 void Game::readyGame(){
+    list = getStates(squareBoard);
+    if(list.size() != 20){
     scene->removeItem(doneButton);
     scene->removeItem(clearButton);
     // create the done placing ships button
@@ -258,24 +260,23 @@ void Game::readyGame(){
     mainButton->setPos(dxPos,dyPos);
     connect(mainButton,SIGNAL(clicked()),this,SLOT(displayMainMenu()));
     scene->addItem(mainButton);
-    QMessageBox::information(this,"Info","Wait for your opponent");
-    message = "START";
+
         if(pickedKlient == 0){
             isKlientReady = true;
-            cout << "zmiana klienta" << endl;
             whosTurn = "PLAYER2";
         }else{
             isServerReady = true;
-            cout << "zmiana serwera" << endl;
+
             whosTurn = "PLAYER1";
         }
+        displayGameWindow();
+        QMessageBox::information(this,"Info","Wait for your opponent");
+    }else{
+        QMessageBox::information(this,"Info","Not all ships are placed");
+    }
 }
 
-void Game::startGame(){
-    isKlientReady = false;
-    isServerReady = false;
-    displayGameWindow();
-}
+
 
 void Game::displayMainMenu(){
     scene->clear();
@@ -307,7 +308,7 @@ void Game::displayMainMenu(){
 }
 
 void Game::displayGameWindow(){
-    list = getStates(squareBoard);
+    //list = getStates(squareBoard);
     squareBoard->placeSquares(520,10,10,10);
 }
 
