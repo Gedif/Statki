@@ -20,6 +20,10 @@ Game::Game(){
     scene->setSceneRect(0,0,1024,768);
     setScene(scene);
 
+    shipSinkedSound = new QMediaPlayer();
+    shipSinkedSound->setMedia(QUrl("qrc:/Sounds/WilhemScream.wav"));
+    bombSound = new QMediaPlayer();
+    bombSound->setMedia(QUrl("qrc:/Sounds/bomb.wav"));
 }
 
 void Game::mouseMoveEvent(QMouseEvent *event){
@@ -108,7 +112,6 @@ void Game::shootAdd(Square *squareToShoot){
        QMessageBox::information(this,"Info","KONIEC GRY");
     }
     else if(whosTurn == "PLAYER1"){
-
         indexOfSquare = squareBoard->squares.indexOf(squareToShoot);
         if(indexOfSquare >= 100){
         message = "INDEKS";
@@ -169,10 +172,12 @@ void Game::shootReceived(string indexReceived){
             listOfShootedInedxes.append(temporaryShot);
             brush.setColor(Qt::red);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
+            shipSinkedSound->play();
         }else if(std::stoi(indexReceived) > 0 && std::stoi(indexReceived) < 5){
             listOfShootedInedxes.append(temporaryShot);
             brush.setColor(Qt::yellow);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
+            bombSound->play();
         }else{
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);

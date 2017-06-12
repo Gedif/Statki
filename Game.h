@@ -12,6 +12,7 @@
 #include <QGraphicsTextItem>
 #include <QMessageBox>
 #include <QApplication>
+#include <QMediaPlayer>
 #include "square_board.h"
 #include "square.h"
 #include "create_ship.h"
@@ -115,7 +116,8 @@ public:
     QString whosTurn;
     QPointF originalPos;
     Square* squareToPlace = NULL;
-     //to edit
+    QMediaPlayer* shipSinkedSound;
+    QMediaPlayer* bombSound;
     Button* doneButton;
 
     int getPort();
@@ -157,6 +159,7 @@ public slots:
     void startGame();
 private:
     int port;
+
 };
 
 #endif // GAME_H
