@@ -2,5 +2,6 @@
     <qresource prefix="/Sounds">
         <file>WilhemScream.wav</file>
         <file>bomb.wav</file>
+        <file>torpedoLos.wav</file>
     </qresource>
 </RCC>

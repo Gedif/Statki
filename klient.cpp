@@ -1,6 +1,6 @@
 #include "klient.h"
 #include "game.h"
-#define PORT 5000
+#define PORT 5005
 #define START "START"
 #define SHORT_TIME 30
 #define LONG_TIME 50

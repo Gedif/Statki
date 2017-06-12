@@ -24,6 +24,8 @@ Game::Game(){
     shipSinkedSound->setMedia(QUrl("qrc:/Sounds/WilhemScream.wav"));
     bombSound = new QMediaPlayer();
     bombSound->setMedia(QUrl("qrc:/Sounds/bomb.wav"));
+    missSound = new QMediaPlayer();
+    missSound->setMedia(QUrl("qrc:/Sounds/torpedoLos.wav"));
 }
 
 void Game::mouseMoveEvent(QMouseEvent *event){
@@ -193,14 +195,9 @@ void Game::shootReceived(string indexReceived){
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
             cout << "zmiana tur" << endl;
             changeTurn();
+            missSound->play();
         }
     }
-    if(listOfShootedInedxes.size() == list.size()){
-       // endScreen();
-       // close();
-
-        cout <<"koniec" << endl;
-   }
 }
 
 QString Game::getWhosTurn(){

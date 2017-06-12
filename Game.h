@@ -117,6 +117,7 @@ public:
     Square* squareToPlace = NULL;
     QMediaPlayer* shipSinkedSound;
     QMediaPlayer* bombSound;
+    QMediaPlayer* missSound;
     Button* doneButton;
     Button* clearButton;
 
