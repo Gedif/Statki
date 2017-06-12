@@ -172,12 +172,22 @@ void Game::shootReceived(string indexReceived){
             listOfShootedInedxes.append(temporaryShot);
             brush.setColor(Qt::red);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
-            shipSinkedSound->play();
+            if(shipSinkedSound->state()==QMediaPlayer::PlayingState){
+                    shipSinkedSound->setPosition(0);
+                }
+            else if(shipSinkedSound->state()==QMediaPlayer::StoppedState){
+                    shipSinkedSound->play();
+                }
         }else if(std::stoi(indexReceived) > 0 && std::stoi(indexReceived) < 5){
             listOfShootedInedxes.append(temporaryShot);
             brush.setColor(Qt::yellow);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
-            bombSound->play();
+            if(bombSound->state()==QMediaPlayer::PlayingState){
+                    bombSound->setPosition(0);
+                }
+            else if(bombSound->state()==QMediaPlayer::StoppedState){
+                    bombSound->play();
+                }
         }else{
             brush.setColor(Qt::green);
             squareBoard->squares.operator[](temporaryShot)->setBrush(brush);
