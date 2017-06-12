@@ -231,7 +231,7 @@ void Game::start(){
     ship4 = new CreateShip();
     ship4->placeSquares(600,20+50*6,4,1);
     // create the clear button
-    Button* clearButton = new Button(QString("Clear Setup"));
+    clearButton = new Button(QString("Clear Setup"));
     int bxPos = this->width()/2 - clearButton->boundingRect().width()/2;
     int byPos = 600;
     clearButton->setPos(bxPos,byPos);
@@ -243,30 +243,21 @@ void Game::start(){
     int dxPos = this->width()/2 - doneButton->boundingRect().width()/2 + 250;
     int dyPos = 600;
     doneButton->setPos(dxPos,dyPos);
-    //if (list.size()==20){
     connect(doneButton,SIGNAL(clicked()),this,SLOT(readyGame()));
     connect(doneButton,SIGNAL(doubleClicked()),this,SLOT(startGame()));
-    //}
     scene->addItem(doneButton);
 }
 
-void Game::endScreen(){
-    scene->clear();
-    QGraphicsRectItem* endScreenWindow = new QGraphicsRectItem;
-    endScreenWindow->setRect(100,100,800,500);
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::darkCyan);
-    endScreenWindow->setBrush(brush);
-    QGraphicsTextItem* text = new QGraphicsTextItem("You Win",endScreenWindow);
-    int xPos = rect().width()/2 - 10*text->boundingRect().width()/2;
-    int yPos = rect().height()/2 - 10*text->boundingRect().height()/2;
-    text->setPos(xPos,yPos);
-    text->setScale(10);
-    scene->addItem(endScreenWindow);
-}
-
 void Game::readyGame(){
+    scene->removeItem(doneButton);
+    scene->removeItem(clearButton);
+    // create the done placing ships button
+    Button* mainButton = new Button(QString("Back to main menu"));
+    int dxPos = this->width()/2 - mainButton->boundingRect().width()/2;
+    int dyPos = 600;
+    mainButton->setPos(dxPos,dyPos);
+    connect(mainButton,SIGNAL(clicked()),this,SLOT(displayMainMenu()));
+    scene->addItem(mainButton);
     QMessageBox::information(this,"Info","Wait for your opponent");
     message = "START";
         if(pickedKlient == 0){
@@ -317,7 +308,6 @@ void Game::displayMainMenu(){
 
 void Game::displayGameWindow(){
     list = getStates(squareBoard);
-    qDebug() << "lista" << list;
     squareBoard->placeSquares(520,10,10,10);
 }
 

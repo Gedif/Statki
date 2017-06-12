@@ -11,7 +11,6 @@
 #include <QDebug>
 #include <QGraphicsTextItem>
 #include <QMessageBox>
-#include <QApplication>
 #include <QMediaPlayer>
 #include "square_board.h"
 #include "square.h"
@@ -119,6 +118,7 @@ public:
     QMediaPlayer* shipSinkedSound;
     QMediaPlayer* bombSound;
     Button* doneButton;
+    Button* clearButton;
 
     int getPort();
     void setPort(int value);
@@ -132,13 +132,6 @@ public slots:
      */
     void start();
     void readyGame();
-    /**
-     * @brief Modyfikacja sceny służąca do wyświetlenia końca gry dla wygranego
-     *
-     * Oznajmia koniec gry
-     *
-     */
-    void endScreen();
     /**
      * @brief Modyfikacja sceny służąca do wyświetlenia końca gry dla wygranego
      *
