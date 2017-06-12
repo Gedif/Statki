@@ -29,7 +29,6 @@ class Square: public QGraphicsRectItem{
 public:
     /**
      * @brief Konstruktor klasy Square
-     * @param parent klasa bazowa po której Square rozszerza.
      */
     Square();
     /**

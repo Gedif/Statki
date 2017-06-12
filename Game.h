@@ -41,21 +41,28 @@ public:
      * @brief Event
      *
      * Jeśli kwadrat został podniesiony to ma przenosić się razem z ruchami myszy
-     *
+     * @param event Argumen event od klasy nadrzędnej QMouseEvent
      */
     void mouseMoveEvent(QMouseEvent* event);
     void Game::mousePressEvent(QMouseEvent *event);
 
     // public methods
 
-
-    QList<int> getStates(SquareBoard* board);
+    /**
+     * @brief Metoda szuka indeksy statków
+     *
+     * Przeszukuje planszę wpisując do listy każdy indeks na którym znajduje się statek
+     *
+     * @param board Argument ten to plansza do gry
+     */
+    QList<int> getListOfIndex(SquareBoard* board);
     /**
      * @brief Metoda podnosząca statek
      *
      * Podnosi statek i zapisuje sobie jego pierwotną pozycję .
      * Lewy przycisk myszy sprawia, że statek wraca na pierwotną pozycję.
      *
+     * @param square Argument to statek
      */
     void pickUpShip(Square* square);
     /**
@@ -63,16 +70,16 @@ public:
      *
      * Umieszcza statek na planszy oraz blokuje możliwość położenia nowego statku w okolicy
      *
+     * @param squareToReplace Argument to kwadrat do usunięcia
      */
-    void placeShip(Square *squareToReplace);
-    void shoot(Square* squareToShoot);   
+    void placeShip(Square *squareToReplace);   
     /**
      * @brief Metoda strzelająca
      *
      * Strzela w wybrany punt na planszy i sprawdza czy jest tam statek,
-     * jesli statek się tam znajduje zmienia kolor kwadratu na czerwony na planszy strzelającego
+     * jesli statek się tam znajduje zmienia kolor kwadratu na planszy strzelającego
      *
-     *
+     * @param squareToShoot Argument to kwadrat w który próbujemy strzelić
      *
      */
     void shootAdd(Square* squareToShoot);
@@ -82,7 +89,7 @@ public:
      * Strzela w wybrany punt na planszy i sprawdza czy jest tam statek,
      * Statek po stronie odbierającego zmienia swój kolor zaleznie od liczby punktów zdrowia które mu pozostały.
      *
-     *
+     * @param index Argument to łańcuch znaków z indeksem pola w które strzela urzytkownik
      */
     void shootReceived(std::string index);
     /**

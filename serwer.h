@@ -32,12 +32,12 @@ public:
     int startSerwer();
     /**
      * @brief Metoda tworząca pętlę czytającą wiadomosći od klienta.
-     * @param sock Argument ten to socket służacy do utworzenia połączenia.
+     * @param clientSock Argument ten to socket służacy do utworzenia połączenia.
      */
     void readThread(socket_ptr clientSock);
     /**
      * @brief Metoda tworząca pętlę wysyłającą wiadomosći do klienta.
-     * @param sock Argument ten to socket służacy do utworzenia połączenia.
+     * @param clientSock Argument ten to socket służacy do utworzenia połączenia.
      */
     void writeThread(socket_ptr clientSock);
 

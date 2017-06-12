@@ -75,37 +75,6 @@ void Game::placeShip(Square *squareToReplace){
     squareToPlace = NULL;
 }
 
-void Game::shoot(Square *squareToShoot){
-    qDebug() << squareBoard->squares.indexOf(squareToShoot);
-    qDebug() << squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip();
-    if (squareBoard->squares.indexOf(squareToShoot) < 100 ){
-        return;
-    }
-    else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) &&
-             (counter == squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip())){
-        QBrush brush;
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor(Qt::red);
-        squareToShoot->setBrush(brush);
-        counter = 1;
-        }
-    else if (list.contains(squareBoard->squares.indexOf(squareToShoot)-100) &&
-             squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip() > 1 &&
-             (counter < squareBoard->squares.operator [](squareBoard->squares.indexOf(squareToShoot)-100)->getLifeOfShip())){
-        QBrush brush;
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor(Qt::yellow);
-        squareToShoot->setBrush(brush);
-        counter++;
-    }
-    else{
-        QBrush brush;
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor(Qt::green);
-        squareToShoot->setBrush(brush);
-    }
-}
-
 void Game::shootAdd(Square *squareToShoot){
     if(listOfShootedInedxes.size() == list.size()){
         QMessageBox::information(this,"Info","KONIEC GRY");
@@ -246,7 +215,7 @@ void Game::start(){
 }
 
 void Game::readyGame(){
-    list = getStates(squareBoard);
+    list = getListOfIndex(squareBoard);
     if(list.size() != 20){
     scene->removeItem(doneButton);
     scene->removeItem(clearButton);
@@ -323,7 +292,7 @@ void Game::displayLoggWindow(){
      }
 }
 
-QList<int> Game::getStates(SquareBoard* board){
+QList<int> Game::getListOfIndex(SquareBoard* board){
     list.clear();
     for (int i = 0; i < board->getSquares().size(); ++i) {
         if (board->getSquares().at(i)->getState() > 0)

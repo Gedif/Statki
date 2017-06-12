@@ -105,11 +105,8 @@ void Klient::readThread(socket_ptr sock)
             else{
                 game->shootReceived(messageFromServer);
                 cout << "strezal otrzymany to" + messageFromServer << endl;
-
-
-            \
+            }
         }
-        boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
+            boost::this_thread::sleep(boost::posix_time::millisec(LONG_TIME));
     }
-}
 }

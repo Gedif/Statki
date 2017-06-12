@@ -19,6 +19,7 @@ public:
      * @brief Konstruktor klasy button
      *
      * Stworzony obiekt posiada teks na nim wyświtlany, miejsce w przestrzeni i rozmiary przycisku
+     * @param name Argument ten to napis wyświetlany na przycisku.
      *
      */
     Button(QString name, QGraphicsItem* parent=NULL);
